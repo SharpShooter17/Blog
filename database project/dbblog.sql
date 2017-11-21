@@ -1,3 +1,7 @@
+CREATE DATABASE IF NOT EXISTS dbBlog;
+
+USE dbBlog;
+
 /************ Update: Tables ***************/
 
 /******************** Add Table: article ************************/
