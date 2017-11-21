@@ -180,3 +180,9 @@ ALTER TABLE user ADD CONSTRAINT fk_role_id
 ALTER TABLE comments ADD CONSTRAINT fk_user_id
 	FOREIGN KEY (user_id) REFERENCES user (user_id)
 	ON UPDATE NO ACTION ON DELETE NO ACTION;
+	
+/*Add rows to role */
+INSERT INTO `role` (`role_id`, `name`) VALUES
+(1, 'User'),
+(2, 'Administrator'),
+(3, 'Moderator');
