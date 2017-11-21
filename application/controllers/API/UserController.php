@@ -14,6 +14,14 @@ class UserController extends CI_Controller {
   public function auth($email, $password){
     echo $this->user->auth($email, $password);
   }
+
+  public function updateRole($user_id, $role_id){
+    echo $this->user->updateRole($user_id, $role_id);
+  }
+
+  public function getUsers(){
+    echo $this->user->getUsers();
+  }
 }
 
 ?>

@@ -22,6 +22,10 @@ class User extends CI_Model {
     return json_encode(array('result' => 'true' ));
   }
 
+  public function getUsers(){
+    return json_encode( $this->db->get('user')->result() );
+  }
+
   private function exists($var, $collumn){
     $this->db->select($collumn);
     $this->db->from("user");
@@ -36,18 +40,25 @@ class User extends CI_Model {
 
   private function getPassword($email){
     $this->db->select('password');
-    $this->db->from('users');
-    $querry = $this->db->where('email', $email)->result();
-    return $querry;
+    $this->db->from('user');
+    $this->db->where('email', $email);
+    $querry = $this->db->get();
+    return $querry->row()->password;
+  }
+
+  public function updateRole($user_id, $role_id){
+    $this->db->set('role_id', $role_id);
+    $this->db->where('user_id', $user_id);
+    return json_encode( array( "result" => ($this->db->update('user') == 1 ? 'true' : 'false') ) );
   }
 
   public function auth($email, $encryptedPassword){
-    if ( $this->exists($email, 'email') ){
-        return json_encode(array('result' => 'Email exists in database' ));
+    if ( !$this->exists($email, 'email') ){
+        return json_encode(array('result' => 'Email does not exists in database' ));
     }
 
     $hash = $this->getPassword($email);
-    $checkPassword = passwordVerify($encryptedPassword, $hash);
+    $checkPassword = $this->passwordVerify($encryptedPassword, $hash);
 
     $result = array("result" =>  $checkPassword ? "true" : "Wrong password");
     return json_encode($result);
@@ -58,7 +69,7 @@ class User extends CI_Model {
   }
 
   private function passwordVerify($password, $hash){
-    return password_hash($password, $hash);
+    return password_verify($password, $hash);
   }
 
 }
