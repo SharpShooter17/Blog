@@ -5,6 +5,7 @@
   <DocFolder>C:\Users\bujaz\Desktop</DocFolder>
   <Sch Cm="" nm="schemaA">
     <Tbl UsSo="1" nm="article">
+      <Cm>Artykuł </Cm>
       <TblOpts/>
       <Pk ClNs="article_id" nm="pkarticle"/>
       <Cl au="0" df="" nm="article_id" nu="0">
@@ -18,6 +19,9 @@
       </Cl>
       <Cl au="0" df="" nm="category_id" nu="0">
         <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="0" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="content" nu="0">
+        <DT arr="0" ds="Text" en="" id="703" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
       <Fk deAc="3" nm="fk_blog_id" prLkCl="blog_id" upAc="3">
         <PrTb mn="0" nm="blog" oe="1" sch="schemaA" zr="0"/>
@@ -33,7 +37,7 @@
       <SchTrHis/>
     </Tbl>
     <Tbl UsSo="1" nm="article_tags">
-      <Cm>Tabela dla każdego artykułu</Cm>
+      <Cm>Tagi dla artykułów</Cm>
       <TblOpts/>
       <Cl au="0" df="" nm="tag_id" nu="0">
         <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="0" un="0"/>
@@ -90,6 +94,7 @@
       <SchTrHis/>
     </Tbl>
     <Tbl UsSo="1" nm="blog_category">
+      <Cm>Kategoria blogu</Cm>
       <TblOpts/>
       <Pk ClNs="blog_category_id" nm="pkblog_category"/>
       <Cl au="1" df="" nm="blog_category_id" nu="0">
@@ -102,6 +107,7 @@
       <SchTrHis/>
     </Tbl>
     <Tbl UsSo="1" nm="category">
+      <Cm>Kategorie wpisów na blogu</Cm>
       <TblOpts/>
       <Pk ClNs="category_id" nm="pkcategory"/>
       <Cl au="1" df="" nm="category_id" nu="0">
@@ -122,6 +128,7 @@
       <SchTrHis/>
     </Tbl>
     <Tbl UsSo="1" nm="comments">
+      <Cm>Komentarze do artykułów</Cm>
       <TblOpts/>
       <Pk ClNs="Id" nm="pkcomments"/>
       <Cl au="0" df="" nm="Id" nu="0">
@@ -153,6 +160,7 @@
       <SchTrHis/>
     </Tbl>
     <Tbl UsSo="1" nm="role">
+      <Cm>Role użytkownika</Cm>
       <TblOpts/>
       <Pk ClNs="role_id" nm="pkrole"/>
       <Cl au="1" df="" nm="role_id" nu="0">
@@ -165,6 +173,7 @@
       <SchTrHis/>
     </Tbl>
     <Tbl UsSo="1" nm="tag">
+      <Cm>Tagi</Cm>
       <TblOpts/>
       <Pk ClNs="tag_id" nm="pktag"/>
       <Cl au="1" df="" nm="tag_id" nu="0">
@@ -177,6 +186,7 @@
       <SchTrHis/>
     </Tbl>
     <Tbl UsSo="1" nm="user">
+      <Cm>Użytkownik</Cm>
       <TblOpts/>
       <Pk ClNs="user_id" nm="pkuser"/>
       <Cl au="1" df="" nm="user_id" nu="0">
@@ -248,7 +258,7 @@
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="schemaA.article_tags.fk_article_id" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="539" x2="539" y1="572" y2="663"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="539" x2="539" y1="585" y2="663"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="schemaA.article_tags.fk_tag_id" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
@@ -354,6 +364,7 @@
     <TreePath>/Schemas (1)</TreePath>
     <TreePath>/Schemas (1)/schemaA</TreePath>
     <TreePath>/Schemas (1)/schemaA/Tables (9)</TreePath>
+    <TreePath>/Schemas (1)/schemaA/Procedures (0)</TreePath>
     <TreePath>/Diagrams (1)</TreePath>
     <TreePath>/Diagrams (1)/diagramA</TreePath>
     <TreePath>/Diagrams (1)/diagramA/Notes (0)</TreePath>
