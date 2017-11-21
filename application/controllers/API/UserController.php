@@ -10,6 +10,10 @@ class UserController extends CI_Controller {
   public function addUser($email, $nick, $password) {
     echo $this->user->addUser(1, $email, $nick, $password);
   }
+
+  public function auth($email, $password){
+    echo $this->user->auth($email, $password);
+  }
 }
 
 ?>

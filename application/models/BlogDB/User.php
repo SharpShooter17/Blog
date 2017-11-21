@@ -42,9 +42,14 @@ class User extends CI_Model {
   }
 
   public function auth($email, $encryptedPassword){
+    if ( $this->exists($email, 'email') ){
+        return json_encode(array('result' => 'Email exists in database' ));
+    }
+
     $hash = $this->getPassword($email);
     $checkPassword = passwordVerify($encryptedPassword, $hash);
-    $result = array("result" =>  $checkPassword ? "true" : "false");
+
+    $result = array("result" =>  $checkPassword ? "true" : "Wrong password");
     return json_encode($result);
   }
 
