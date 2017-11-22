@@ -9,11 +9,19 @@ class ArticleController extends CI_Controller {
     $this->load->helper('date');
   }
 
-  public function addArticle($blog_id, $category_id, $content){
+  public function addArticle($blog_id, $category_id, $title, $content){
     $format = $this->article->getFormat();
     $time = mdate($format, time());
-    $result = $this->article->addArticle($blog_id, $time, $category_id, $content);
+    $result = $this->article->addArticle($blog_id, $time, $category_id, $title, $content);
     echo $this->statements->getJson($result);
+  }
+
+  public function getArticles($blog_id){
+    echo json_encode($this->article->getArticles($blog_id));
+  }
+
+  public function getContent($article_id){
+    echo json_encode($this->article->getContent($article_id));
   }
 
 }
