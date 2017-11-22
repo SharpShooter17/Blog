@@ -7,14 +7,14 @@ class Role extends CI_Model {
 
   public function get($id){
     $querry = $this->db->get('role')->result()[$id - 1];
-    return json_encode($querry);
+    return $querry;
   }
 
   public function insert($id, $name){
     $this->role_id = $id;
     $this->name = $name;
     $result = $this->db->insert('role', $this);
-    return '{"result":"'.$result ? 'true' : 'false'.'"}';
+    return $result ? 1 : 0;
   }
 }
 ?>

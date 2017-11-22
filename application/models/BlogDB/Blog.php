@@ -12,24 +12,40 @@ class Blog extends CI_Model {
   }
 
   public function addBlog($user_id, $blog_category_id, $name, $last_modification, $creation_date) {
+    if ( $this->exists($name, 'name') ) {
+      return 2;
+    }
+
     $this->user_id = $user_id;
     $this->blog_category_id = $blog_category_id;
     $this->name = $name;
     $this->last_modification = $last_modification;
     $this->creation_date = $creation_date;
 
-    $this->db->insert('blog', $this);
+    return $this->db->insert('blog', $this) ? 1 : 0;
   }
 
   public function deleteBlog($blog_id){
     $this->db->where('blog_id', $blog_id);
-    $this->db->delete('blog');
+    $result = $this->db->delete('blog') != false;
   }
 
   public function updateLastModification($blog_id, $last_modification) {
     $this->db->set('last_modification', $last_modification);
     $this->db->where('blog_id', $blog_id);
-    $this->db->update('blog');
+    return $this->db->update('blog');
+  }
+
+  private function exists($var, $collumn){
+    $this->db->select($collumn);
+    $this->db->from("blog");
+    $this->db->where($collumn, $var);
+    $querry = $this->db->get()->result();
+
+    if (count($querry) != 0 ) {
+      return true;
+    }
+    return false;
   }
 
 }
