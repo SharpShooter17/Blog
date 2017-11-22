@@ -1,0 +1,5 @@
+/*Add rows to role */
+INSERT INTO `role` (`role_id`, `name`) VALUES
+(1, 'User'),
+(2, 'Administrator'),
+(3, 'Moderator');

@@ -155,6 +155,8 @@ ALTER TABLE article ADD CONSTRAINT fk_category_id
 ALTER TABLE article_tags ADD CONSTRAINT fk_tag_id
 	FOREIGN KEY (tag_id) REFERENCES tag (tag_id)
 	ON UPDATE NO ACTION ON DELETE NO ACTION;
+	FOREIGN KEY (article_id) REFERENCES article (article_id)
+	ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 /* Add Foreign Key: fk_blog_category_id */
 ALTER TABLE blog ADD CONSTRAINT fk_blog_category_id
@@ -181,8 +183,3 @@ ALTER TABLE comments ADD CONSTRAINT fk_user_id
 	FOREIGN KEY (user_id) REFERENCES user (user_id)
 	ON UPDATE NO ACTION ON DELETE NO ACTION;
 	
-/*Add rows to role */
-INSERT INTO `role` (`role_id`, `name`) VALUES
-(1, 'User'),
-(2, 'Administrator'),
-(3, 'Moderator');

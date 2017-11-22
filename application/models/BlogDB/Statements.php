@@ -14,9 +14,11 @@ class Statements extends CI_Model {
 
   public function getJson($index) {
     if (!is_array($this->statements)) {
-      echo 'var statements is not array!';
-      die();
+      die('var statements is not array');
+    } else if ($index < 0 || $index > count($this->statements)) {
+      die('index is out of range');
     }
+    
     return json_encode($this->statements[$index]);
   }
 }
