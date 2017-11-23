@@ -10,6 +10,7 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
-		redirect(base_url('application/views/React/build/static/index.html'));
+		//$this->load->view('react/index.html');
+		redirect(base_url('index.html'));
 	}
 }

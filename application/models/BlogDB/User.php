@@ -1,5 +1,5 @@
 <?php
-
+header('Access-Control-Allow-Origin: *');
 class User extends CI_Model {
   public $role_id;
   public $email;

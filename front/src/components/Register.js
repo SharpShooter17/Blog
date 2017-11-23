@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import {Redirect} from 'react-router-dom'
 
+import axios from 'axios';
+var querystring = require('querystring');
 export class Register extends Component {
   constructor(props){
     super(props);
@@ -12,15 +14,40 @@ export class Register extends Component {
       msgEmail: "",
       msgNick: "",
       msgConfirmPassword: "",
-      msgPassword: ""
+      msgPassword: "",
+      msgFromServer: ""
     };
     this._handleSubmit = this._handleSubmit.bind(this);
+    this.clearData = this.clearData.bind(this);
+  }
+
+  clearData(){
+    this.setState({
+      email: "",
+      password: "",
+      confirmPassword: "",
+      nick: "",
+      msgEmail: "",
+      msgNick: "",
+      msgConfirmPassword: "",
+      msgPassword: "",
+      msgFromServer: ""
+    });
   }
 
   updateEmail = e => {
     this.setState({
       email: e.target.value
     });
+    if ( this.validateEmail(e.target.value) ){
+      this.setState({
+        msgEmail: ""
+      });
+    } else {
+      this.setState({
+        msgEmail: "Email nie poprawny!"
+      });
+    }
   };
 
   updateNick = e => {
@@ -46,15 +73,28 @@ export class Register extends Component {
   };
 
   checkConditions = () => {
-    if (
-      this.state.password.length >= 8 &&
-      this.state.password === this.state.confirmPassword &&
-      this.validateEmail(this.state.email)
-    ) {
-      return true;
-    } else {
+    if (this.state.password.length < 8){
+      this.setState({
+        msgPassword: "Hasła jest za krótkie!"
+      });
       return false;
     }
+
+    if (this.state.password != this.state.confirmPassword ) {
+      this.setState({
+        msgConfirmPassword: "Hasła nie są identyczne!"
+      });
+      return false;
+    }
+
+    if ( !this.validateEmail(this.state.email) ) {
+      this.setState({
+        msgEmail: "Niepoprawny email!"
+      });
+      return false;
+    }
+
+    return true;
   };
 
   onSubmit = e => {
@@ -70,12 +110,30 @@ export class Register extends Component {
   if (!this.checkConditions()) {
     this.wrongRegistrationAlerts();
   } else {
-
+    axios.post('http://localhost/Blog/index.php?/API/UserController/addUser', querystring.stringify({
+        email: this.state.email,
+        nick: this.state.nick,
+        password: this.state.password
+    }))
+    .then(response => {
+    	if (response.data == "true"){
+        this.clearData();
+        this.setState({
+          msgFromServer: "Rejestracja przebiegła pomyślnie. Możesz się zalogować."
+        });
+      } else {
+        this.setState({
+          msgFromServer: response.data
+        });
+      }
+    })
+    .catch(error => {
+        console.log(error.response)
+    });
   }
 };
 
   wrongRegistrationAlerts() {
-
   }
 
 
@@ -88,12 +146,14 @@ export class Register extends Component {
           <fieldset>
 
           <legend>Rejestracja</legend>
-
+          <div>
+            <span className="text-danger">{this.state.msgFromServer}</span>
+          </div>
           <div className="form-group">
             <label className="col-md-4 control-label" for="email">email</label>
             <div className="col-md-4">
             <input onChange={this.updateEmail} value={this.state.email} id="email" name="email" type="text" placeholder="Jan.Kowalski@poczta.pl" className="form-control input-md" />
-            <span className="help-block">{this.state.msgEmail}</span>
+            <div className="text-danger">{this.state.msgEmail}</div>
             <span className="help-block">Wpisz swój email</span>
             </div>
           </div>
@@ -102,6 +162,7 @@ export class Register extends Component {
             <label className="col-md-4 control-label" for="nick">Nick</label>
             <div className="col-md-4">
             <input onChange={this.updateNick} value={this.state.nick} id="nick" name="nick" type="text" placeholder="Mój_nick" className="form-control input-md" />
+            <div className="text-danger">{this.state.msgNick}</div>
             <span className="help-block">Wpisz swój unikatowy nick, którym będziesz się posługiwał/a w serwisie</span>
             </div>
           </div>
@@ -110,6 +171,7 @@ export class Register extends Component {
             <label className="col-md-4 control-label" for="password">Hasło</label>
             <div className="col-md-4">
               <input onChange={this.updatePassword} value={this.state.password} id="password" name="password" type="password" placeholder="hasło" className="form-control input-md" />
+              <div className="text-danger">{this.state.msgPassword}</div>
               <span className="help-block">Hasło musi posiadać co najmniej 8 znaków</span>
             </div>
           </div>
@@ -117,7 +179,8 @@ export class Register extends Component {
           <div className="form-group">
             <label className="col-md-4 control-label" for="confimPassword">Potwierdź hasło</label>
             <div className="col-md-4">
-              <input onChange={this.updateConfirmPassword} value={this.state.confimPassword} id="confimPassword" name="confimPassword" type="password" placeholder="hasło" className="form-control input-md" />
+              <input onChange={this.updateConfirmPassword} value={this.state.confirmPassword} id="confimPassword" name="confimPassword" type="password" placeholder="hasło" className="form-control input-md" />
+              <div className="text-danger">{this.state.msgConfirmPassword}</div>
               <span className="help-block">Przepisz swoje hasło w celu jego potwierdzenia</span>
             </div>
           </div>
@@ -126,7 +189,7 @@ export class Register extends Component {
             <label className="col-md-4 control-label" for="buttonRegister"></label>
             <div className="col-md-8">
               <button onClick={event => {this.onSubmit;}} id="buttonRegister" name="buttonRegister" className="btn btn-success">Zarejestruj się</button>
-              <button id="buttonReset" name="buttonReset" className="btn btn-danger">Resetuj</button>
+              <button onClick={this.clearData} id="buttonReset" name="buttonReset" className="btn btn-danger">Resetuj</button>
             </div>
           </div>
 
