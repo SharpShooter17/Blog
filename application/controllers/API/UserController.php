@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+header('Access-Control-Allow-Origin: *');
 class UserController extends CI_Controller {
   public function __construct(){
     parent :: __construct();
@@ -18,7 +18,9 @@ class UserController extends CI_Controller {
     echo $result = $this->statements->getJson($result);
   }
 
-  public function auth($email, $password){
+  public function auth(){
+    $email = $this->input->post('email');
+    $password = $this->input->post('password');
     $result = $this->user->auth($email, $password);
     header('Content-Type: application/json');
     echo $result = $this->statements->getJson($result);;
