@@ -13,14 +13,17 @@ class ArticleController extends CI_Controller {
     $format = $this->article->getFormat();
     $time = mdate($format, time());
     $result = $this->article->addArticle($blog_id, $time, $category_id, $title, $content);
+    header('Content-Type: application/json');
     echo $this->statements->getJson($result);
   }
 
   public function getArticles($blog_id){
+    header('Content-Type: application/json');
     echo json_encode($this->article->getArticles($blog_id));
   }
 
   public function getContent($article_id){
+    header('Content-Type: application/json');
     echo json_encode($this->article->getContent($article_id));
   }
 

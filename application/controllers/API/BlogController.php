@@ -13,6 +13,7 @@ class BlogController extends CI_Controller {
     $format = $this->blog->getFormat();
     $time = mdate($format, time());
     $result = $this->blog->addBlog($user_id, $blog_category_id, $name, null, $time);
+    header('Content-Type: application/json');
     echo $result = $this->statements->getJson($result);;
   }
 
@@ -23,6 +24,7 @@ class BlogController extends CI_Controller {
     } else {
       $result = $this->statements->getJson(0);
     }
+    header('Content-Type: application/json');
     echo $result;
   }
 
@@ -36,6 +38,7 @@ class BlogController extends CI_Controller {
     } else {
       $result = $this->statements->getJson(0);
     }
+    header('Content-Type: application/json');
     echo $result;
   }
 
