@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom';
 
 import axios from 'axios';
 var querystring = require('querystring');
@@ -9,7 +10,8 @@ export class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      serverMsg: ""
+      serverMsg: "",
+      redirect: 'false'
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -22,9 +24,10 @@ export class Login extends Component {
           password: this.state.password
       }))
       .then(response => {
-      	if (response.data.token != ""){
+      	if (response.data.response == "true"){
           this.setState({
-            serverMsg: "Jesteś zalogowany: " + response.data.token 
+            serverMsg: "Jesteś zalogowany: " + response.data.token,
+            redirect: 'true'
           });
         } else {
           this.setState({
@@ -61,7 +64,9 @@ export class Login extends Component {
 
   render() {
     return (
+      (this.state.redirect == 'true') ? ( <Redirect to="/" /> ) :
       <div>
+        {this.state.redirect}
         <h1>Zaloguj się</h1>
         <hr />
         <form  onSubmit={this.handleSubmit} className="form-horizontal">

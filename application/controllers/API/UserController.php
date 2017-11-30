@@ -41,15 +41,16 @@ class UserController extends CI_Controller {
     $token = null;
     if ($result == 1){
       $id = $this->user->getUserId($email);
-      $token = array('token' => $this->generateToken($id));
+      $token = $this->generateToken($id);
     }
 
     header('Content-Type: application/json');
+    $result = array('response' => $this->statements->get($result));
+
     if ( $token != null ) {
-      echo json_encode($token);
-    } else {
-      echo $result = $this->statements->getJson($result);;
+      $result['token'] = $token;
     }
+      echo json_encode($result);
   }
 
   public function updateRole($user_id, $role_id){

@@ -22,5 +22,13 @@ class Statements extends CI_Model {
 
     return json_encode(array('response' => $this->statements[$index]));
   }
+  public function get($index){
+    if (!is_array($this->statements)) {
+      die('var statements is not array');
+    } else if ($index < 0 || $index > count($this->statements)) {
+      die('index is out of range');
+    }
+    return $this->statements[$index];
+  }
 }
 ?>
