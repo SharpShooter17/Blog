@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom';
 
 import axios from 'axios';
 var querystring = require('querystring');
@@ -15,7 +15,8 @@ export class Register extends Component {
       msgNick: "",
       msgConfirmPassword: "",
       msgPassword: "",
-      msgFromServer: ""
+      msgFromServer: "",
+      redirect: true
     };
     this._handleSubmit = this._handleSubmit.bind(this);
     this.clearData = this.clearData.bind(this);
@@ -116,14 +117,16 @@ export class Register extends Component {
         password: this.state.password
     }))
     .then(response => {
-    	if (response.data == "true"){
+    	if (response.data.response == "true"){
         this.clearData();
         this.setState({
-          msgFromServer: "Rejestracja przebiegła pomyślnie. Możesz się zalogować."
+          msgFromServer: "Rejestracja przebiegła pomyślnie. Możesz się zalogować.",
+          redirect: false
         });
+        this.redirect();
       } else {
         this.setState({
-          msgFromServer: response.data
+          msgFromServer: response.data.response
         });
       }
     })
@@ -136,9 +139,8 @@ export class Register extends Component {
   wrongRegistrationAlerts() {
   }
 
-
   render() {
-    return (
+    return ( this.state.redirect ?
       <div>
         <h1>Zarejestruj się</h1>
         <hr />
@@ -195,7 +197,7 @@ export class Register extends Component {
 
           </fieldset>
           </form>
-      </div>
+      </div> : <Redirect to='login' />
     );
   }
 }
