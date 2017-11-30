@@ -7,7 +7,7 @@ class UserController extends CI_Controller {
     $this->load->model("BlogDB/user");
     $this->load->model("BlogDB/user");
     $this->load->model('BlogDB/statements');
-    $this->load->library("jwt");
+    $this->load->model('token');
   }
 
   public function addUser() {
@@ -21,18 +21,6 @@ class UserController extends CI_Controller {
     echo $result = $this->statements->getJson($result);
   }
 
-  private function generateToken($user_id){
-      $CONSUMER_KEY = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
-      $CONSUMER_SECRET = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
-      $CONSUMER_TTL = 86400;
-      return $this->jwt->encode(array(
-        'consumerKey'=>$CONSUMER_KEY,
-        'userId'=>$user_id,
-        'issuedAt'=>date(DATE_ISO8601, strtotime("now")),
-        'ttl'=>$CONSUMER_TTL
-      ), $CONSUMER_SECRET);
-  }
-
   public function auth(){
     $email = $this->input->post('email');
     $password = $this->input->post('password');
@@ -41,7 +29,7 @@ class UserController extends CI_Controller {
     $token = null;
     if ($result == 1){
       $id = $this->user->getUserId($email);
-      $token = $this->generateToken($id);
+      $token = $this->token->generateToken($id);
     }
 
     header('Content-Type: application/json');
@@ -55,7 +43,7 @@ class UserController extends CI_Controller {
 
   public function updateRole($user_id, $role_id){
     $token = $this->input->post('token');
-    $administrator_id = $this->user->tokenIsValid($token);
+    $administrator_id = $this->token->tokenIsValid($token);
 
     header('Content-Type: application/json');
     if ($administrator_id == -1) {

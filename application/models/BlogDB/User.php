@@ -1,5 +1,5 @@
 <?php
-
+defined('BASEPATH') OR exit('No direct script access allowed');
 class User extends CI_Model {
   public $role_id;
   public $email;
@@ -76,16 +76,6 @@ class User extends CI_Model {
     $this->db->where('email', $email);
     $querry = $this->db->get()->result()[0];
     return $querry;
-  }
-
-  public function tokenIsValid($token){
-    try {
-      $encrypted = $this->jwt->decode($token, 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', false);
-      return $encrypted->userId;
-    } catch (Exception $e) {
-      echo 'Caught exception: ',  $e->getMessage(), "\n";
-      return -1;
-    }
   }
 
   public function getUserRole($user_id){
