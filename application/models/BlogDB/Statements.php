@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Statements extends CI_Model {
   private $statements = array(
+    -1 => 'Token is not valid',
     0 => 'false',
     1 => 'true',
     2 => 'Blog name exists',
@@ -18,8 +19,8 @@ class Statements extends CI_Model {
     } else if ($index < 0 || $index > count($this->statements)) {
       die('index is out of range');
     }
-    
-    return json_encode($this->statements[$index]);
+
+    return json_encode(array('response' => $this->statements[$index]));
   }
 }
 ?>

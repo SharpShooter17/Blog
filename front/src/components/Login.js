@@ -22,18 +22,18 @@ export class Login extends Component {
           password: this.state.password
       }))
       .then(response => {
-      	if (response.data == "true"){
+      	if (response.data.token != ""){
           this.setState({
-            serverMsg: "Jesteś zalogowany"
+            serverMsg: "Jesteś zalogowany: " + response.data.token 
           });
         } else {
           this.setState({
-            serverMsg: response.data
+            serverMsg: response.data.response
           });
         }
       })
       .catch(error => {
-          console.log(error.response)
+          console.log(error.response);
       });
     }  else {
       this.setState({

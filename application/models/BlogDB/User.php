@@ -59,7 +59,6 @@ class User extends CI_Model {
     $hash = $this->getPassword($email);
     $checkPassword = $this->passwordVerify($encryptedPassword, $hash);
 
-
     return $checkPassword ? 1 : 6;
   }
 
@@ -71,6 +70,31 @@ class User extends CI_Model {
     return password_verify($password, $hash);
   }
 
+  public function getUserId($email){
+    $this->db->select('user_id');
+    $this->db->from('user');
+    $this->db->where('email', $email);
+    $querry = $this->db->get()->result()[0];
+    return $querry;
+  }
+
+  public function tokenIsValid($token){
+    try {
+      $encrypted = $this->jwt->decode($token, 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', false);
+      return $encrypted->userId;
+    } catch (Exception $e) {
+      echo 'Caught exception: ',  $e->getMessage(), "\n";
+      return -1;
+    }
+  }
+
+  public function getUserRole($user_id){
+    $this->db->select('role');
+    $this->db->from('user');
+    $this->db->where('user_id', $user_id);
+    $querry = $this->db->get()->result()[0];
+    return $querry;
+  }
 }
 
 ?>
