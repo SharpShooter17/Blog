@@ -88,20 +88,20 @@ export class ControlPanel extends Component {
     this.setState({
       content:
       <div id="addBlog">
-        <form class="form-horizontal">
+        <form className="form-horizontal">
         <fieldset>
 
         <legend>Dodaj blog</legend>
 
-        <div class="form-group">
-        <label class="col-md-4 control-label" for="blogName">Nazwa bloga</label>
-        <div class="col-md-4">
-        <input id="blogName" name="blogName" type="text" placeholder="nazwa" class="form-control input-md" required="" />
-        <span class="help-block">Wpisz nazwę swojego bloga</span>
+        <div className="form-group">
+        <label className="col-md-4 control-label" for="blogName">Nazwa bloga</label>
+        <div className="col-md-4">
+        <input id="blogName" name="blogName" type="text" placeholder="nazwa" className="form-control input-md" required="" />
+        <span className="help-block">Wpisz nazwę swojego bloga</span>
         </div>
         </div>
 
-        <div class="form-group">
+        <div className="form-group">
         <label class="col-md-4 control-label" for="categories">Kategoria</label>
         <div class="col-md-4">
           <select id="categories" name="categories" class="form-control">
@@ -140,18 +140,18 @@ export class ControlPanel extends Component {
           </div>
         </div>
 
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="category">Nazwa kategorii</label>
-          <div class="col-md-4">
-          <input id="category" name="category" type="text" placeholder="kategoria" class="form-control input-md" />
-          <span class="help-block">Wpisz nazwę kategorii </span>
+        <div className="form-group">
+          <label className="col-md-4 control-label" for="category">Nazwa kategorii</label>
+          <div className="col-md-4">
+          <input id="category" name="category" type="text" placeholder="kategoria" className="form-control input-md" />
+          <span className="help-block">Wpisz nazwę kategorii </span>
           </div>
         </div>
 
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="submit"></label>
-          <div class="col-md-4">
-            <button id="submit" name="submit" class="btn btn-success">Dodaj kategorię </button>
+        <div className="form-group">
+          <label className="col-md-4 control-label" for="submit"></label>
+          <div className="col-md-4">
+            <button id="submit" name="submit" className="btn btn-success">Dodaj kategorię </button>
           </div>
         </div>
 
@@ -163,50 +163,50 @@ export class ControlPanel extends Component {
     this.setState({
       content:
       <div>
-        <form class="form-horizontal">
+        <form className="form-horizontal">
           <fieldset>
 
           <legend>Dodaj artykuł</legend>
 
-          <div class="form-group">
-            <label class="col-md-4 control-label" for="blog">Blog</label>
-            <div class="col-md-4">
-              <select id="blog" name="blog" class="form-control">
+          <div className="form-group">
+            <label className="col-md-4 control-label" for="blog">Blog</label>
+            <div className="col-md-4">
+              <select id="blog" name="blog" className="form-control">
                 <option value="1">Option one</option>
                 <option value="2">Option two</option>
               </select>
             </div>
           </div>
 
-          <div class="form-group">
-            <label class="col-md-4 control-label" for="category">Kategoria</label>
-            <div class="col-md-4">
-              <select id="category" name="category" class="form-control">
+          <div className="form-group">
+            <label className="col-md-4 control-label" for="category">Kategoria</label>
+            <div className="col-md-4">
+              <select id="category" name="category" className="form-control">
                 <option value="1">Option one</option>
                 <option value="2">Option two</option>
               </select>
             </div>
           </div>
 
-          <div class="form-group">
-            <label class="col-md-4 control-label" for="title">Tytuł</label>
-            <div class="col-md-4">
-            <input id="title" name="title" type="text" placeholder="tutuł" class="form-control input-md" required="" />
-            <span class="help-block">Wpisz tytuł artykułu</span>
+          <div className="form-group">
+            <label className="col-md-4 control-label" for="title">Tytuł</label>
+            <div className="col-md-4">
+            <input id="title" name="title" type="text" placeholder="tutuł" className="form-control input-md" required="" />
+            <span className="help-block">Wpisz tytuł artykułu</span>
             </div>
           </div>
 
-          <div class="form-group">
-            <label class="col-md-4 control-label" for="content">Treść</label>
-            <div class="col">
-              <textarea class="form-control" id="content" name="content">Treść Twojego artykułu</textarea>
+          <div className="form-group">
+            <label className="col-md-4 control-label" for="content">Treść</label>
+            <div className="col">
+              <textarea className="form-control" id="content" name="content">Treść Twojego artykułu</textarea>
             </div>
           </div>
 
-          <div class="form-group">
-            <label class="col-md-4 control-label" for="submit"></label>
-            <div class="col-md-4">
-              <button id="submit" name="submit" class="btn btn-success">Dodaj artykuł</button>
+          <div className="form-group">
+            <label className="col-md-4 control-label" for="submit"></label>
+            <div className="col-md-4">
+              <button id="submit" name="submit" className="btn btn-success">Dodaj artykuł</button>
             </div>
           </div>
 
@@ -219,29 +219,29 @@ export class ControlPanel extends Component {
     this.setState({
       content:
       <div>
-      <h2 className="text-danger">Uwaga!</h2>
+      <h2 classNameName="text-danger">Uwaga!</h2>
       <p>
         Poniższa operacja trwale <b>usunie</b> Twój <b>blog</b>! Tej operacji nie da się odwrócić!
       </p>
-      <form class="form-horizontal">
+      <form className="form-horizontal">
         <fieldset>
 
         <legend>Usuń blog</legend>
 
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="blog">Wybierz blog</label>
-          <div class="col-md-4">
-            <select id="blog" name="blog" class="form-control">
+        <div className="form-group">
+          <label className="col-md-4 control-label" for="blog">Wybierz blog</label>
+          <div className="col-md-4">
+            <select id="blog" name="blog" className="form-control">
               <option value="1">Option one</option>
               <option value="2">Option two</option>
             </select>
           </div>
         </div>
 
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="submit">Wciśnij aby usunąć blog</label>
-          <div class="col-md-4">
-            <button id="submit" name="submit" class="btn btn-danger">Usuń blog</button>
+        <div className="form-group">
+          <label className="col-md-4 control-label" for="submit">Wciśnij aby usunąć blog</label>
+          <div className="col-md-4">
+            <button id="submit" name="submit" className="btn btn-danger">Usuń blog</button>
           </div>
         </div>
 
@@ -260,25 +260,25 @@ export class ControlPanel extends Component {
           Poniższa operacja trwale <b>usunie</b> Twoją <b>kategorię</b> oraz <b>wszystkie artykuły</b> z tej kategorii!
           Tej operacji nie da się odwrócić!
         </p>
-        <form class="form-horizontal">
+        <form className="form-horizontal">
           <fieldset>
 
           <legend>Usuń kategorię</legend>
 
-          <div class="form-group">
-            <label class="col-md-4 control-label" for="category">Wybierz kategorię</label>
-            <div class="col-md-4">
-              <select id="category" name="category" class="form-control">
+          <div className="form-group">
+            <label className="col-md-4 control-label" for="category">Wybierz kategorię</label>
+            <div className="col-md-4">
+              <select id="category" name="category" className="form-control">
                 <option value="1">Option one</option>
                 <option value="2">Option two</option>
               </select>
             </div>
           </div>
 
-          <div class="form-group">
-            <label class="col-md-4 control-label" for="submit">Wciśnij aby usunąć kategorię</label>
-            <div class="col-md-4">
-              <button id="submit" name="submit" class="btn btn-danger">Usuń kategorię</button>
+          <div className="form-group">
+            <label className="col-md-4 control-label" for="submit">Wciśnij aby usunąć kategorię</label>
+            <div className="col-md-4">
+              <button id="submit" name="submit" className="btn btn-danger">Usuń kategorię</button>
             </div>
           </div>
 
@@ -297,35 +297,35 @@ export class ControlPanel extends Component {
           Poniższa operacja trwale <b>usunie</b> Twoją <b>kategorię</b> oraz <b>wszystkie artykuły</b> z tej kategorii!
           Tej operacji nie da się odwrócić!
         </p>
-        <form class="form-horizontal">
+        <form className="form-horizontal">
           <fieldset>
 
           <legend>Usuń artykuł</legend>
 
-          <div class="form-group">
-          <label class="col-md-4 control-label" for="category">Wybierz kategorię</label>
-          <div class="col-md-4">
-            <select id="category" name="category" class="form-control">
+          <div className="form-group">
+          <label className="col-md-4 control-label" for="category">Wybierz kategorię</label>
+          <div className="col-md-4">
+            <select id="category" name="category" className="form-control">
               <option value="1">Option one</option>
               <option value="2">Option two</option>
             </select>
           </div>
           </div>
 
-          <div class="form-group">
-          <label class="col-md-4 control-label" for="title">Tytuł</label>
-          <div class="col-md-4">
-            <select id="title" name="title" class="form-control">
+          <div className="form-group">
+          <label className="col-md-4 control-label" for="title">Tytuł</label>
+          <div className="col-md-4">
+            <select id="title" name="title" className="form-control">
               <option value="1">Option one</option>
               <option value="2">Option two</option>
             </select>
           </div>
           </div>
 
-          <div class="form-group">
-          <label class="col-md-4 control-label" for="submit">Wciśnij aby usunąć artykuł</label>
-          <div class="col-md-4">
-            <button id="submit" name="submit" class="btn btn-danger">Usuń artykuł</button>
+          <div className="form-group">
+          <label className="col-md-4 control-label" for="submit">Wciśnij aby usunąć artykuł</label>
+          <div className="col-md-4">
+            <button id="submit" name="submit" className="btn btn-danger">Usuń artykuł</button>
           </div>
           </div>
 
