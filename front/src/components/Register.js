@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
-
+import Cookies from 'js-cookie';
 import axios from 'axios';
 var querystring = require('querystring');
 export class Register extends Component {
@@ -140,6 +140,9 @@ export class Register extends Component {
   }
 
   render() {
+    if ( Cookies.get('logged') == 'true' ) {
+      return (<Redirect to="/" />)
+    }
     return ( this.state.redirect ?
       <div>
         <h1>Zarejestruj się</h1>

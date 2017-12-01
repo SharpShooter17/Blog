@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 import axios from 'axios';
 var querystring = require('querystring');
@@ -11,7 +12,8 @@ export class Login extends Component {
       email: "",
       password: "",
       serverMsg: "",
-      redirect: 'false'
+      redirect: 'false',
+      logged: 'false',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -29,6 +31,8 @@ export class Login extends Component {
             serverMsg: "Jesteś zalogowany: " + response.data.token,
             redirect: 'true'
           });
+          Cookies.set('token', response.data.token, {expiries: 1});
+          Cookies.set('logged', 'true', {expiries: 1});
         } else {
           this.setState({
             serverMsg: response.data.response
@@ -63,10 +67,13 @@ export class Login extends Component {
   };
 
   render() {
+    if ( Cookies.get('logged') == 'true' ) {
+      return (<Redirect to="/" />)
+    }
+
     return (
       (this.state.redirect == 'true') ? ( <Redirect to="/" /> ) :
       <div>
-        {this.state.redirect}
         <h1>Zaloguj się</h1>
         <hr />
         <form  onSubmit={this.handleSubmit} className="form-horizontal">
@@ -103,7 +110,6 @@ export class Login extends Component {
 
           </fieldset>
           </form>
-
       </div>
     );
   }
