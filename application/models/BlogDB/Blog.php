@@ -11,6 +11,11 @@ class Blog extends CI_Model {
     return '%Y-%m-%d %h:%i:%s';
   }
 
+  public function getUserBlogs($user_id){
+    $this->db->where('user_id', $user_id);
+    return $this->db->get('blog')->result();
+  }
+
   public function addBlog($user_id, $blog_category_id, $name, $last_modification, $creation_date) {
     if ( $this->exists($name, 'name') ) {
       return 2;

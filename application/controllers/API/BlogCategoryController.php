@@ -1,9 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-class BlogCategoryController extends CI_Controller
-{
-
+header('Access-Control-Allow-Origin: *');
+class BlogCategoryController extends CI_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->model('BlogDB/blog_category');
@@ -12,7 +10,7 @@ class BlogCategoryController extends CI_Controller
   public function getCategories() {
     $result = $this->blog_category->getCategories();
     header('Content-Type: application/json');
-    echo json_encode($result);
+    echo json_encode(array('results' => $result ));
   }
 
 }

@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
 import Cookies from 'js-cookie';
 import {Redirect} from 'react-router-dom';
+import {apiClient} from './Api';
+import axios from 'axios';
+
+var querystring = require('querystring');
+
+
 export class ControlPanel extends Component {
   constructor(props){
     super(props);
@@ -12,10 +18,48 @@ export class ControlPanel extends Component {
     this.removeCategory = this.removeCategory.bind(this);
     this.removeArticle = this.removeArticle.bind(this);
 
+    this.getBlogCategories = this.getBlogCategories.bind(this);
+    this.getBlogs = this.getBlogs.bind(this);
+
     this.state = {
-      content: ''
+      content: '',
+      blog_categories: [],
+      blogs: [],
     }
   }
+
+  getBlogCategories(){
+    apiClient.get('/index.php?/API/BlogCategoryController/getCategories')
+     .then(response => {
+       this.setState({
+         blog_categories: response.data.results
+       })
+     })
+     .catch(error => {
+       console.log(error);
+     });
+  }
+
+  getBlogs(){
+    console.log('Token:',Cookies.get('token'));
+    axios.post('http://localhost/Blog/index.php?/API/BlogController/getUserBlogs', querystring.stringify({
+        token: Cookies.get('token')
+    }))
+      .then(response => {
+        this.setState({
+          blogs: response.data.results
+        })
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  componentWillMount(){
+    this.getBlogCategories();
+    this.getBlogs();
+  }
+
   render() {
     if (Cookies.get('logged') == 'true'){
       return (
@@ -61,8 +105,7 @@ export class ControlPanel extends Component {
         <label class="col-md-4 control-label" for="categories">Kategoria</label>
         <div class="col-md-4">
           <select id="categories" name="categories" class="form-control">
-            <option value="1">Option one</option>
-            <option value="2">Option two</option>
+            {this.state.blog_categories.map(category => <option value={category.id}>{category.name}</option>)}
           </select>
         </div>
         </div>
@@ -92,8 +135,7 @@ export class ControlPanel extends Component {
           <label class="col-md-4 control-label" for="blog">Blog</label>
           <div class="col-md-4">
             <select id="blog" name="blog" class="form-control">
-              <option value="1">Option one</option>
-              <option value="2">Option two</option>
+              {this.state.blogs.map(blog => <option value={blog.blog_id}>{blog.name}</option>)}
             </select>
           </div>
         </div>

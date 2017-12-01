@@ -1,12 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+header('Access-Control-Allow-Origin: *');
 class BlogController extends CI_Controller {
   public function __construct(){
     parent :: __construct();
     $this->load->model('BlogDB/blog');
     $this->load->model('BlogDB/statements');
     $this->load->helper('date');
+    $this->load->model('token');
   }
 
   public function addBlog($user_id, $blog_category_id, $name){
@@ -40,6 +41,21 @@ class BlogController extends CI_Controller {
     }
     header('Content-Type: application/json');
     echo $result;
+  }
+
+  public function getUserBlogs(){
+    $token = $this->input->post('token');
+    $user = $this->token->tokenIsValid($token);
+
+    if (is_numeric($user)){
+      if ($user == -1) {
+        echo $this->statements->getJson($user_id);
+        return;
+      }
+    }
+
+    $blogs = $this->blog->getUserBlogs(1);
+    echo json_encode(array('results' => $blogs));
   }
 
 }

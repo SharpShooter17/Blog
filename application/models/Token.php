@@ -12,11 +12,12 @@ class Token extends CI_Model {
       $loggin_time = new DateTime($encrypted->issuedAt, new DateTimeZone('Europe/Warsaw') );
       $expiries = $loggin_time->add(new DateInterval('PT' . $encrypted->ttl . 'S'));
       $timeToExpire = time() - strtotime($expiries->getTimestamp());
+
       if ($timeToExpire <= 0){
         return -1;
       }
 
-      return $encrypted->userId;
+      return $encrypted->user_id;
     } catch (Exception $e) {
       echo 'Caught exception: ',  $e->getMessage(), "\n";
       return -1;
@@ -29,7 +30,7 @@ class Token extends CI_Model {
       $CONSUMER_TTL = 86400;
       return $this->jwt->encode(array(
         'consumerKey'=>$CONSUMER_KEY,
-        'userId'=>$user_id,
+        'user_id'=>$user_id,
         'issuedAt'=>date(DATE_ISO8601, strtotime("now")),
         'ttl'=>$CONSUMER_TTL
       ), $CONSUMER_SECRET);
