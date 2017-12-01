@@ -61,6 +61,7 @@ export class ControlPanel extends Component {
   }
 
   render() {
+    console.log(this.state.blog_categories);
     if (Cookies.get('logged') == 'true'){
       return (
         <div>
