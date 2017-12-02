@@ -38,10 +38,12 @@ class Article extends CI_Model
   }
 
   public function getLastArticles($count, $page){
-    $this->db->select('date, title, content, blog.name as blog, category.name as kategoria');
+    $this->db->select('article_id, date, title, content, blog.blog_id, blog.name as blog, category.category_id, category.name as kategoria, user.nick, user.user_id, blog_category.name as blogCategory, blog_category.blog_category_id');
     $this->db->from('article');
     $this->db->join('category', 'category.category_id = article.article_id');
     $this->db->join('blog', 'blog.blog_id = category.blog_id');
+    $this->db->join('blog_category', 'blog.blog_category_id = blog_category.blog_category_id');
+    $this->db->join('user', 'user.user_id = blog.user_id');
 
     $querry = $this->db->get()->result();
     return $querry;
