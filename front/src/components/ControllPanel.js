@@ -9,7 +9,7 @@ export class ControllPanel extends React.Component {
   render(){
     return (
       <div>
-        <h1>Panel sterowania</h1>
+        <h1 className="p-5">Panel sterowania</h1>
         <hr />
         <p>
           Witaj w panelu sterowania. <br />

@@ -145,7 +145,7 @@ export class Register extends Component {
     }
     return ( this.state.redirect ?
       <div>
-        <h1>Zarejestruj się</h1>
+        <h1 className="p-5">Zarejestruj się</h1>
         <hr />
         <form onSubmit={this._handleSubmit} className="form-horizontal">
           <fieldset>

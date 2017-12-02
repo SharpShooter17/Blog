@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.17.1",
+    "froala-editor": "^2.7.2",
     "js-cookie": "^2.2.0",
     "react": "^16.1.1",
     "react-cookie": "^2.1.2",

@@ -74,7 +74,7 @@ export class Login extends Component {
     return (
       (this.state.redirect == 'true') ? ( <Redirect to="/" /> ) :
       <div>
-        <h1>Zaloguj się</h1>
+        <h1 className="p-5">Zaloguj się</h1>
         <hr />
         <form  onSubmit={this.handleSubmit} className="form-horizontal">
           <fieldset>
