@@ -40,7 +40,7 @@ const getUserBlogs = function(obj){
 
 const getCategories = function (obj, blogId){
     apiClient().get('/index.php?/API/CategoryController/getBlogCategories/' + blogId)
-    .then(response => { console.log('kategorie response', response.data.results)
+    .then(response => {
       obj.setState({
         categories: response.data.results
       })

@@ -11,7 +11,7 @@ class CategoryController extends CI_Controller {
   public function getBlogCategories($blog_id) {
     $result = $this->category->getBlogCategories($blog_id);
     header('Content-Type: application/json');
-    echo json_encode($result);
+    echo json_encode(array('results' => $result));
   }
 
   public function addCategory($blog_id, $name) {
