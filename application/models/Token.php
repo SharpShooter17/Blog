@@ -16,8 +16,7 @@ class Token extends CI_Model {
       if ($timeToExpire <= 0){
         return -1;
       }
-
-      return $encrypted->user_id;
+      return $encrypted->user_id->user_id;
     } catch (Exception $e) {
       echo 'Caught exception: ',  $e->getMessage(), "\n";
       return -1;

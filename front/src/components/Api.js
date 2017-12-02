@@ -68,4 +68,20 @@ const addBlog = function (obj, blogName, blogCategory){
     });
 }
 
-export default {getBlogCategories, getUserBlogs, getCategories, addBlog}
+const addCategory = function (obj, blog_id, name){
+    axios.post(baseURL + '/index.php?/API/CategoryController/addCategory', querystring.stringify({
+        token: Cookies.get('token'),
+        blogId: blog_id,
+        category: name
+    }))
+      .then(response => {
+        obj.setState({
+          msg: response.data.results
+        })
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+}
+
+export default {getBlogCategories, getUserBlogs, getCategories, addBlog, addCategory}

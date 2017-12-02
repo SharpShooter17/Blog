@@ -53,6 +53,16 @@ class Blog extends CI_Model {
     return false;
   }
 
+  public function userHasBlog($user_id, $blog_id){
+    $this->db->select('blog_id');
+    $this->db->from('blog');
+    $this->db->where('user_id', $user_id);
+    $results = $this->db->get()->result();
+    if (count($results) != 0 ) {
+      return true;
+    }
+    return false;
+  }
 }
 
 ?>

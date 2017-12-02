@@ -7,6 +7,8 @@ export class AddCategory extends React.Component{
   constructor(props){
     super(props);
 
+    this.handleSubmit = this.handleSubmit.bind(this);
+
     this.state = {
       blogs: [],
     }
@@ -16,9 +18,16 @@ export class AddCategory extends React.Component{
     Api.getUserBlogs(this);
   }
 
+  handleSubmit(e){
+    e.preventDefault()
+    const blogId = e.target.blog.value;
+    const name = e.target.category.value;
+    Api.addCategory(this, blogId, name);
+  }
+
   render(){
     return (
-      <form class="form-horizontal">
+      <form onSubmit={this.handleSubmit} class="form-horizontal">
         <fieldset>
 
         <legend>Dodaj kategorię</legend>
@@ -43,7 +52,7 @@ export class AddCategory extends React.Component{
         <div className="form-group">
           <label className="col-md-4 control-label" for="submit"></label>
           <div className="col-md-4">
-            <button id="submit" name="submit" className="btn btn-success">Dodaj kategorię </button>
+            <button onClick={event => {this.onSubmit;}} id="submit" name="submit" className="btn btn-success">Dodaj kategorię </button>
           </div>
         </div>
 
