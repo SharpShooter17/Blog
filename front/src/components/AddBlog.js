@@ -21,7 +21,7 @@ export class AddBlog extends React.Component{
     e.preventDefault();
 
     const blogName = e.target.blogName.value;
-    const blogCategory = e.target.categories.selectedIndex;
+    const blogCategory = e.target.category.value;
     alert(blogCategory)
     Api.addBlog(this, blogName, blogCategory);
   }
@@ -45,8 +45,9 @@ export class AddBlog extends React.Component{
         <div className="form-group">
         <label class="col-md-4 control-label" for="categories">Kategoria</label>
         <div class="col-md-4">
-          <select id="categories" name="categories" class="form-control">
-            {this.state.blog_categories.map(category => <option value={category.id}>{category.name}</option>)}
+          <select id="category" name="category" class="form-control">
+            <option value="0" selected="" disabled="">Wybierz kategorię</option>
+            {this.state.blog_categories.map(category => <option value={category.blog_category_id}>{category.name}</option>)}
           </select>
         </div>
         </div>
