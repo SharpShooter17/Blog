@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Api from './Api';
 
-
 export class Home extends Component {
   constructor(props){
     super(props);
@@ -11,7 +10,7 @@ export class Home extends Component {
   }
 
   componentWillMount(){
-    Api.getLastestArticles(this, 20, 1);
+    Api.getLastestArticles(this, 20, 1, 2000);
   }
 
   render() {
@@ -22,12 +21,32 @@ export class Home extends Component {
         <h3>Ostatnie artykuły</h3>
         {this.state.articles.map(
           article =>
-          <div className="article">
-            <h4><b>{article.title}</b></h4>
-            <span>{article.blog} - {article.kategoria} - {article.date}</span>
-            <p>
-              {article.content}
-            </p>
+          <div className="row">
+            <div className="col-12">
+              <div className="row">
+                <div className="col-12 bg-dark">
+                  <div className="p-3">
+                    <h4 className="text-light"><b>{article.title}</b></h4>
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-3 bg-secondary text-light">
+                  <span>Kategoria bloga: <strong>{article.blogCategory}</strong></span><br />
+                  <span>Nazwa Bloga: <strong>{article.blog}</strong></span><br />
+                  <span>Z kategorii: <strong>{article.kategoria}</strong></span><br />
+                  <span>Autor: <strong>{article.nick}</strong></span><br />
+                  <span>Data dodania: <strong>{article.date}</strong></span><br />
+                </div>
+                <div className="col lead bg-light">
+                  <article>
+                    <p>
+                      {article.content}
+                    </p>
+                  </article>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>

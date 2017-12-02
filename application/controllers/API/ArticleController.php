@@ -49,10 +49,20 @@ class ArticleController extends CI_Controller {
     echo json_encode($this->article->getContent($article_id));
   }
 
-  public function getLastArticles($count, $page){
-
+  public function getLastArticles($count = 20, $page = 1, $wordsLimit = null){
       header('Content-Type: application/json');
-      echo json_encode($this->article->getLastArticles($count, $page));
+      $result = $this->article->getLastArticles($count, $page);
+      //var_dump($result);die();
+      if ($wordsLimit != null && is_numeric($wordsLimit)){
+        for ( $i = 0; $i < count($result); $i++ ){
+          $dots = '';
+          if ( strlen($result[$i]->content) > $wordsLimit ){
+            $dots = '...';
+          }
+          $result[$i]->content = substr($result[$i]->content, 0, $wordsLimit) . $dots;
+        }
+      }
+      echo json_encode($result);
   }
 }
 

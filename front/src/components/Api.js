@@ -102,8 +102,8 @@ const addArticle = function (obj, _blog_id, _category_id, _title, _content){
     });
 }
 
-const getLastestArticles = function (obj, count, page){
-  apiClient().get('/index.php?/API/ArticleController/getLastArticles/' + count + '/' + page)
+const getLastestArticles = function (obj, count, page, wordsLimit){
+  apiClient().get('/index.php?/API/ArticleController/getLastArticles/' + count + '/' + page + '/' + wordsLimit)
   .then(response => {
     obj.setState({
       articles: response.data
