@@ -10,7 +10,17 @@ class BlogController extends CI_Controller {
     $this->load->model('token');
   }
 
-  public function addBlog($user_id, $blog_category_id, $name){
+  public function addBlog(){
+    $user = $this->input->post('token');
+    $user = $this->token->tokenIsValid($user);
+    if (is_numeric($user)){
+      if ($user == -1){
+        echo $this->statements->getJson(-1);
+        return;
+      }
+    }
+    $blog_category_id = $this->input->post('category');
+    $name = $this->input->post('name');
     $format = $this->blog->getFormat();
     $time = mdate($format, time());
     $result = $this->blog->addBlog($user_id, $blog_category_id, $name, null, $time);
