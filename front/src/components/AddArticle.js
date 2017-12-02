@@ -19,6 +19,7 @@ export default class AddArticle extends React.Component {
 
   updateCategory(e){
     Api.getCategories(this, e.target.value)
+    console.log('Cat: ', this.state.categories)
   }
 
   render(){
