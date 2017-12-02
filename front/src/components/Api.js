@@ -2,6 +2,8 @@ import axios from 'axios';
 import Cookies from 'js-cookie'
 var querystring = require('querystring');
 
+const baseURL = 'http://localhost:80/Blog/'
+
 const apiClient = function() {
     return axios.create({
       baseURL: "http://localhost:80/Blog/", //http://localhost:80/Blog/
@@ -25,7 +27,7 @@ const getBlogCategories = function(obj){
   }
 
 const getUserBlogs = function(obj){
-  axios.post('http://localhost/Blog/index.php?/API/BlogController/getUserBlogs', querystring.stringify({
+  axios.post(baseURL + '/index.php?/API/BlogController/getUserBlogs', querystring.stringify({
       token: Cookies.get('token')
   }))
     .then(response => {
@@ -51,7 +53,7 @@ const getCategories = function (obj, blogId){
   }
 
 const addBlog = function (obj, blogName, blogCategory){
-  axios.post('http://localhost/Blog/index.php?/API/BlogController/addBlog', querystring.stringify({
+  axios.post(baseURL + '/index.php?/API/BlogController/addBlog', querystring.stringify({
       token: Cookies.get('token'),
       name: blogName,
       category: blogCategory
@@ -66,4 +68,4 @@ const addBlog = function (obj, blogName, blogCategory){
     });
 }
 
-export default {getBlogCategories, getUserBlogs, getCategories}
+export default {getBlogCategories, getUserBlogs, getCategories, addBlog}

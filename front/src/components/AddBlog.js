@@ -18,8 +18,11 @@ export class AddBlog extends React.Component{
   }
 
   handleSubmit(e){
+    e.preventDefault();
+
     const blogName = e.target.blogName.value;
-    const blogCategory = e.target.categories.value;
+    const blogCategory = e.target.categories.selectedIndex;
+    alert(blogCategory)
     Api.addBlog(this, blogName, blogCategory);
   }
 

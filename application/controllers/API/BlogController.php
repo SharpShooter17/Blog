@@ -19,11 +19,12 @@ class BlogController extends CI_Controller {
         return;
       }
     }
+
     $blog_category_id = $this->input->post('category');
     $name = $this->input->post('name');
     $format = $this->blog->getFormat();
     $time = mdate($format, time());
-    $result = $this->blog->addBlog($user_id, $blog_category_id, $name, null, $time);
+    $result = $this->blog->addBlog($user, $blog_category_id, $name, null, $time);
     header('Content-Type: application/json');
     echo $result = $this->statements->getJson($result);;
   }
