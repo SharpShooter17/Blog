@@ -18,7 +18,7 @@ render() {
   if (Cookies.get('logged') == 'true'){
     return (
       <ul className="nav">
-        <li className="nav-item"><Link className="nav-link" to="/home">Strona główna</Link></li>
+        <li className="nav-item"><Link className="nav-link" to="/Home">Strona główna</Link></li>
         <li className="nav-item"><Link className="nav-link" to="/ControllPanel">Panel sterowania</Link></li>
         <li className="nav-item"><a onClick={this.handleLogOut} className="nav-link" href="">Wyloguj</a></li>
       </ul>
@@ -26,9 +26,9 @@ render() {
   }
   return (
       <ul className="nav">
-        <li className="nav-item"><Link className="nav-link" to="/home">Strona główna</Link></li>
-        <li className="nav-item"><Link className="nav-link" to="/register">Rejestracja</Link></li>
-        <li className="nav-item"><Link className="nav-link" to="login">Logowanie</Link></li>
+        <li className="nav-item"><Link className="nav-link" to="/Home">Strona główna</Link></li>
+        <li className="nav-item"><Link className="nav-link" to="/Register">Rejestracja</Link></li>
+        <li className="nav-item"><Link className="nav-link" to="Login">Logowanie</Link></li>
       </ul>
     );
   }

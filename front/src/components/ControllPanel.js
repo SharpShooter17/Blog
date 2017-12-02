@@ -11,14 +11,12 @@ export class ControllPanel extends React.Component {
       <div>
         <h1 className="p-5">Panel sterowania</h1>
         <hr />
-        <p>
-          Witaj w panelu sterowania. <br />
-          <ul>
-            <li><Link to='ControllPanel/AddBlog'>Dodaj blog</Link></li>
-            <li><Link to='ControllPanel/AddCategory'>Dodaj kategorię</Link></li>
-            <li><Link to='ControllPanel/AddArticle'>Dodaj artykuł</Link></li>
-          </ul>
-        </p>
+        <h3>Menu:</h3>
+        <ul>
+          <li><Link to='ControllPanel/AddBlog'>Dodaj blog</Link></li>
+          <li><Link to='ControllPanel/AddCategory'>Dodaj kategorię</Link></li>
+          <li><Link to='ControllPanel/AddArticle'>Dodaj artykuł</Link></li>
+        </ul>
         <div>
           <Switch>
             <Route exact path='/ControllPanel/AddBlog' component={AddBlog}/>
