@@ -13,9 +13,9 @@ export class ControllPanel extends React.Component {
         <hr />
         <h3>Menu:</h3>
         <ul>
-          <li><Link to='ControllPanel/AddBlog'>Dodaj blog</Link></li>
-          <li><Link to='ControllPanel/AddCategory'>Dodaj kategorię</Link></li>
-          <li><Link to='ControllPanel/AddArticle'>Dodaj artykuł</Link></li>
+          <li><Link to='/ControllPanel/AddBlog'>Dodaj blog</Link></li>
+          <li><Link to='/ControllPanel/AddCategory'>Dodaj kategorię</Link></li>
+          <li><Link to='/ControllPanel/AddArticle'>Dodaj artykuł</Link></li>
         </ul>
         <div>
           <Switch>
