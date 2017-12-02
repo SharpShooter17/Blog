@@ -14,7 +14,8 @@
     "react-router-redux": "^5.0.0-alpha.8",
     "react-scripts": "1.0.17",
     "redux-react-session": "^2.2.0",
-    "summernote": "^0.8.8"
+    "summernote": "^0.8.8",
+    "trumbowyg": "^2.8.1"
   },
   "scripts": {
     "start": "react-scripts start",
