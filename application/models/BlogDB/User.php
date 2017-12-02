@@ -85,6 +85,15 @@ class User extends CI_Model {
     $querry = $this->db->get()->result()[0];
     return $querry;
   }
+
+  public function getUserDetails($nick){
+    $this->db->select('role.name, user.email, user.nick, user.user_id');
+    $this->db->from('user');
+    $this->db->join('role', 'role.role_id = user.role_id');
+    $this->db->where('user.nick', $nick);
+    $querry = $this->db->get()->result();
+    return $querry;
+  }
 }
 
 ?>

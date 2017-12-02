@@ -115,4 +115,21 @@ const getLastestArticles = function (obj, count, page, wordsLimit){
 
 }
 
-export default {getBlogCategories, getUserBlogs, getCategories, addBlog, addCategory, addArticle, getLastestArticles}
+const getUserDetails = function (obj, nick){
+  apiClient().get('/index.php?/API/UserController/getUserDetails/' + nick)
+  .then(response => { console.log(response.data.results)
+    obj.setState({
+      nick: response.data.results.nick,
+      id: response.data.results.user_id,
+      email: response.data.results.email,
+      role: response.data.results.name,
+    })
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
+
+export default {getBlogCategories, getUserBlogs, getCategories,
+                addBlog, addCategory, addArticle,
+                getLastestArticles, getUserDetails}

@@ -65,6 +65,18 @@ class UserController extends CI_Controller {
     header('Content-Type: application/json');
     echo json_encode($users);
   }
+
+  public function getUserDetails($nick){
+    header('Content-Type: application/json');
+    $result = $this->user->getUserDetails($nick);
+    if (count($result) == 1){
+      $result = $result[0];
+    } else {
+      $result = $this->statements->get(0);
+    }
+    echo json_encode( array('results' => $result ));
+    return;
+  }
 }
 
 ?>
