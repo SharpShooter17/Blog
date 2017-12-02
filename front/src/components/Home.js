@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Api from './Api';
+import {Link} from 'react-router-dom'
 
 export class Home extends Component {
   constructor(props){
@@ -35,7 +36,7 @@ export class Home extends Component {
                   <span>Kategoria bloga: <strong>{article.blogCategory}</strong></span><br />
                   <span>Nazwa Bloga: <strong>{article.blog}</strong></span><br />
                   <span>Z kategorii: <strong>{article.kategoria}</strong></span><br />
-                  <span>Autor: <strong>{article.nick}</strong></span><br />
+                  <span>Autor: <strong><Link to={'/User/' + article.nick}>{article.nick}</Link></strong></span><br />
                   <span>Data dodania: <strong>{article.date}</strong></span><br />
                 </div>
                 <div className="col lead bg-light">
