@@ -102,4 +102,17 @@ const addArticle = function (obj, _blog_id, _category_id, _title, _content){
     });
 }
 
-export default {getBlogCategories, getUserBlogs, getCategories, addBlog, addCategory, addArticle}
+const getLastestArticles = function (obj, count, page){
+  apiClient().get('/index.php?/API/ArticleController/getLastArticles/' + count + '/' + page)
+  .then(response => {
+    obj.setState({
+      articles: response.data
+    })
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
+}
+
+export default {getBlogCategories, getUserBlogs, getCategories, addBlog, addCategory, addArticle, getLastestArticles}

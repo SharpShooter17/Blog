@@ -49,6 +49,11 @@ class ArticleController extends CI_Controller {
     echo json_encode($this->article->getContent($article_id));
   }
 
+  public function getLastArticles($count, $page){
+
+      header('Content-Type: application/json');
+      echo json_encode($this->article->getLastArticles($count, $page));
+  }
 }
 
 ?>

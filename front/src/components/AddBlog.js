@@ -22,7 +22,7 @@ export class AddBlog extends React.Component{
 
     const blogName = e.target.blogName.value;
     const blogCategory = e.target.category.value;
-    alert(blogCategory)
+  
     Api.addBlog(this, blogName, blogCategory);
   }
 
