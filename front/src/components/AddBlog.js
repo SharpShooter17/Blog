@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import Api from './Api';
 
 export class AddBlog extends React.Component{
@@ -9,7 +9,8 @@ export class AddBlog extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
-      blog_categories: []
+      blog_categories: [],
+      msg: ''
     }
   }
 
@@ -22,11 +23,14 @@ export class AddBlog extends React.Component{
 
     const blogName = e.target.blogName.value;
     const blogCategory = e.target.category.value;
-  
+
     Api.addBlog(this, blogName, blogCategory);
   }
 
   render(){
+    if (this.state.msg == 'true'){
+      return ( <Redirect to='/ControllPanel/addCategory' /> );
+    }
     return(
       <div id="addBlog">
         <form onSubmit={this.handleSubmit} className="form-horizontal">
@@ -61,6 +65,9 @@ export class AddBlog extends React.Component{
 
         </fieldset>
         </form>
+        <div className="text-danger">
+          <span>{this.state.msg}</span>
+        </div>
       </div>
     )
   }

@@ -60,7 +60,7 @@ const addBlog = function (obj, blogName, blogCategory){
   }))
     .then(response => {
       obj.setState({
-        msg: response.data.results
+        msg: response.data.response
       })
     })
     .catch(function (error) {
@@ -76,7 +76,7 @@ const addCategory = function (obj, blog_id, name){
     }))
       .then(response => {
         obj.setState({
-          msg: response.data.results
+          msg: response.data.response
         })
       })
       .catch(function (error) {

@@ -11,6 +11,7 @@ export class AddCategory extends React.Component{
 
     this.state = {
       blogs: [],
+      msg: ''
     }
   }
 
@@ -28,6 +29,7 @@ export class AddCategory extends React.Component{
   render(){
     return (
       <form onSubmit={this.handleSubmit} class="form-horizontal">
+        <div className="text-success" >{ (this.state.msg == 'true') ? 'Dodano kategorie' : ''}</div>
         <fieldset>
 
         <legend>Dodaj kategorię</legend>
@@ -57,6 +59,9 @@ export class AddCategory extends React.Component{
         </div>
 
         </fieldset>
+        <div className="text-danger">
+          <span>{this.state.msg == 'true' ? '' : this.state.msg}</span>
+        </div>
       </form>
     )
   }

@@ -11,7 +11,8 @@ class Statements extends CI_Model {
     4 => 'Nick exists in database',
     5 => 'Email does not exists in database',
     6 => 'Wrong password',
-    7 => 'Unauthorized action'
+    7 => 'Unauthorized action',
+    8 => 'Category exists'
   );
 
   public function getJson($index) {

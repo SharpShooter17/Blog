@@ -23,7 +23,7 @@ class Blog extends CI_Model {
 
     $this->user_id = $user_id;
     $this->blog_category_id = $blog_category_id;
-    $this->name = $name;
+    $this->name = str_replace(' ', '_', $name);
     $this->last_modification = $last_modification;
     $this->creation_date = $creation_date;
 
