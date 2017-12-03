@@ -42,7 +42,7 @@ export class AddBlog extends React.Component{
         <label className="col-md-4 control-label" for="blogName">Nazwa bloga</label>
         <div className="col-md-4">
         <input id="blogName" name="blogName" type="text" placeholder="nazwa" className="form-control input-md" required="" />
-        <span className="help-block">Wpisz nazwę swojego bloga</span>
+        <span className="help-block">Wpisz nazwę swojego bloga. Każda spacja zostanie zamieniona na '_'</span>
         </div>
         </div>
 

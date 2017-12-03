@@ -131,7 +131,9 @@ const getUserDetails = function (obj, nick){
 }
 
 const getBlogDetails = function(obj, blog){
-  apiClient().get('/index.php?/API/BlogController/getBlogDetails/' + blog)
+  axios.post(baseURL + '/index.php?/API/BlogController/getBlogDetails/', querystring.stringify({
+    name: blog
+  }))
   .then(response => { console.log(response.data.results)
     obj.setState({
       nick: response.data.results.nick,

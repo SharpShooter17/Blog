@@ -70,9 +70,15 @@ class BlogController extends CI_Controller {
     echo json_encode(array('results' => $blogs));
   }
 
-  public function getBlogDetails($blog){
+  public function getBlogDetails(){
+    $blog = $this->input->post('name');
     header('Content-Type: application/json');
-    echo json_encode(array('results' => $this->blog->getBlogDetails($blog)[0] ));
+    $querry = $this->blog->getBlogDetails($blog);
+    if (count($querry) == 0){
+      echo $this->statements->getJson(0);
+      return;
+    }
+    echo json_encode(array('results' => $this->blog->getBlogDetails($blog)[0]));
   }
 
 }
