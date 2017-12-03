@@ -65,8 +65,14 @@ class BlogController extends CI_Controller {
       }
     }
 
-    $blogs = $this->blog->getUserBlogs(1);
+    $blogs = $this->blog->getUserBlogs($user);
+    header('Content-Type: application/json');
     echo json_encode(array('results' => $blogs));
+  }
+
+  public function getBlogDetails($blog){
+    header('Content-Type: application/json');
+    echo json_encode(array('results' => $this->blog->getBlogDetails($blog)[0] ));
   }
 
 }

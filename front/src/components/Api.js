@@ -130,6 +130,25 @@ const getUserDetails = function (obj, nick){
     });
 }
 
+const getBlogDetails = function(obj, blog){
+  apiClient().get('/index.php?/API/BlogController/getBlogDetails/' + blog)
+  .then(response => { console.log(response.data.results)
+    obj.setState({
+      nick: response.data.results.nick,
+      name: response.data.results.name,
+      last_modification: response.data.results.last_modification,
+      creation_date: response.data.results.creation_date,
+      blog_id: response.data.results.blog_id,
+      articles: response.data.results.email,
+      blog_category_id: response.data.results.blog_category_id,
+      blog_category: response.data.results.blogCategory
+    })
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
+
 export default {getBlogCategories, getUserBlogs, getCategories,
                 addBlog, addCategory, addArticle,
-                getLastestArticles, getUserDetails}
+                getLastestArticles, getUserDetails, getBlogDetails}

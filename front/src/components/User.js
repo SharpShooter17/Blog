@@ -21,14 +21,21 @@ export class User extends React.Component {
 
   render(){
     return (
-      <div className="row">
-        <div className="col">
-          <h2 className="p-3">Użytkownik:</h2>
-          <hr />
-          <span>ID: {this.state.id}</span><br />
-          <span>Nick: {this.state.nick} </span><br />
-          <span>Email: {this.state.email}</span><br />
-          <span>Rola: {this.state.role}</span><br />
+      <div>
+        <div className="row">
+          <div className="col">
+            <h2 className="p-3">Użytkownik:</h2>
+            <hr />
+            <span>ID: {this.state.id}</span><br />
+            <span>Nick: {this.state.nick} </span><br />
+            <span>Email: {this.state.email}</span><br />
+            <span>Rola: {this.state.role}</span><br />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <h3 className="p-3">Blogi użytkownika:</h3>
+          </div>
         </div>
       </div>
     );

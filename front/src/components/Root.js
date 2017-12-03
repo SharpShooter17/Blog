@@ -7,6 +7,7 @@ import { Login } from './Login'
 import { Register } from './Register'
 import { ControllPanel } from './ControllPanel'
 import { User } from './User'
+import { Blog } from './Blog'
 
 import '../css/bootstrap.css'
 
@@ -29,6 +30,7 @@ export class Root extends Component {
               <Route exact path={'/Register'} component={ Register } />
               <Route path={'/ControllPanel'} component={ ControllPanel } />
               <Route path={'/User/:user'} component={User} />
+              <Route path={'/Blog/:blog'} component={Blog} />
             </Switch>
           </main>
         </div>
