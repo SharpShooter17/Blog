@@ -26,7 +26,7 @@ class BlogController extends CI_Controller {
     $time = mdate($format, time());
     $result = $this->blog->addBlog($user, $blog_category_id, $name, null, $time);
     header('Content-Type: application/json');
-    echo $result = $this->statements->getJson($result);;
+    echo $result = $this->statements->getJson($result);
   }
 
   public function deleteBlog($blog_id) {

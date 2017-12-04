@@ -139,7 +139,16 @@ const getBlogs = function(){
   return apiClient().get('/index.php?/API/BlogController/getBlogs');
 }
 
+const addComment = function(article, _comment) {
+  return axios.post(baseURL + '/index.php?/API/CommentsController/addComment/', querystring.stringify({
+    token: Cookies.get('token'),
+    article_id: article,
+    comment: _comment
+  }))
+}
+
 export default {getBlogCategories, getUserBlogs, getCategories,
                 addBlog, addCategory, addArticle,
                 getLastestArticles, getUserDetails, getBlogDetails,
-                getBlogArticles, getArticle, getUsers, getBlogs}
+                getBlogArticles, getArticle, getUsers, getBlogs,
+                addComment}
