@@ -54,17 +54,7 @@ class BlogController extends CI_Controller {
     echo $result;
   }
 
-  public function getUserBlogs(){
-    $token = $this->input->post('token');
-    $user = $this->token->tokenIsValid($token);
-
-    if (is_numeric($user)){
-      if ($user == -1) {
-        echo $this->statements->getJson($user_id);
-        return;
-      }
-    }
-
+  public function getUserBlogs($user){
     $blogs = $this->blog->getUserBlogs($user);
     header('Content-Type: application/json');
     echo json_encode(array('results' => $blogs));

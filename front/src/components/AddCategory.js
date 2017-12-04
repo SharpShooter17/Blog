@@ -16,7 +16,11 @@ export class AddCategory extends React.Component{
   }
 
   componentWillMount(){
-    Api.getUserBlogs(this);
+    Api.getUserBlogs(Cookies.get('id')).then(function(response){
+      this.setState({
+        blogs: response.data.results
+      })
+    }.bind(this));
   }
 
   handleSubmit(e){

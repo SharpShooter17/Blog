@@ -27,6 +27,7 @@ class UserController extends CI_Controller {
     $result = $this->user->auth($email, $password);
 
     $token = null;
+    $id = null;
     if ($result == 1){
       $id = $this->user->getUserId($email);
       $token = $this->token->generateToken($id);
@@ -38,7 +39,8 @@ class UserController extends CI_Controller {
     if ( $token != null ) {
       $result['token'] = $token;
     }
-      echo json_encode($result);
+    $result['id'] = $id;
+    echo json_encode($result);
   }
 
   public function updateRole($user_id, $role_id){

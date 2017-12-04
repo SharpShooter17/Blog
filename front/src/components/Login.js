@@ -33,6 +33,7 @@ export class Login extends Component {
           });
           Cookies.set('token', response.data.token, {expiries: 1});
           Cookies.set('logged', 'true', {expiries: 1});
+          Cookies.set('id', response.data.id, {expiries: 1});
         } else {
           this.setState({
             serverMsg: response.data.response
@@ -47,6 +48,7 @@ export class Login extends Component {
         serverMsg: "Nie poprawny EMAIL!"
       });
     }
+    alert('stop');
   }
 
   updateEmail = e => {

@@ -75,7 +75,7 @@ class User extends CI_Model {
     $this->db->from('user');
     $this->db->where('email', $email);
     $querry = $this->db->get()->result()[0];
-    return $querry;
+    return $querry->user_id;
   }
 
   public function getUserRole($user_id){

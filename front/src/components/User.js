@@ -17,8 +17,19 @@ export class User extends React.Component {
   }
 
   componentWillMount(){
-    Api.getUserDetails(this, this.state.nick);
-    Api.getUserBlogs(this);
+    Api.getUserDetails(this.state.nick).then(function(response){
+      this.setState({
+        nick: response.data.results.nick,
+        id: response.data.results.user_id,
+        email: response.data.results.email,
+        role: response.data.results.name,
+      })
+      Api.getUserBlogs(response.data.results.user_id).then(function(response){
+        this.setState({
+          blogs: response.data.results
+        })
+      }.bind(this))
+    }.bind(this))
   }
 
   render(){

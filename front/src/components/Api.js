@@ -26,18 +26,8 @@ const getBlogCategories = function(obj){
      })
   }
 
-const getUserBlogs = function(obj){
-  axios.post(baseURL + '/index.php?/API/BlogController/getUserBlogs', querystring.stringify({
-      token: Cookies.get('token')
-  }))
-    .then(response => {
-      obj.setState({
-        blogs: response.data.results
-      })
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+const getUserBlogs = function(id){
+  return apiClient().get('/index.php?/API/BlogController/getUserBlogs/' + id);
 }
 
 const getCategories = function (obj, blogId){
@@ -115,19 +105,8 @@ const getLastestArticles = function (obj, count, page, wordsLimit){
 
 }
 
-const getUserDetails = function (obj, nick){
-  apiClient().get('/index.php?/API/UserController/getUserDetails/' + nick)
-  .then(response => { console.log(response.data.results)
-    obj.setState({
-      nick: response.data.results.nick,
-      id: response.data.results.user_id,
-      email: response.data.results.email,
-      role: response.data.results.name,
-    })
-    })
-    .catch(error => {
-      console.log(error);
-    });
+const getUserDetails = function (nick){
+  return apiClient().get('/index.php?/API/UserController/getUserDetails/' + nick);
 }
 
 const getBlogDetails = function(blog){

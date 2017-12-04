@@ -1,5 +1,6 @@
 import React from 'react'
 import Api from './Api';
+import Cookies from 'js-cookie'
 
 export default class AddArticle extends React.Component {
   constructor(props){
@@ -15,7 +16,11 @@ export default class AddArticle extends React.Component {
   }
 
   componentWillMount(){
-    Api.getUserBlogs(this);
+    Api.getUserBlogs(Cookies.get('id')).then(function(response){
+      this.setState({
+        blogs: response.data.results
+      })
+    }.bind(this));
   }
 
   updateCategory(e){
