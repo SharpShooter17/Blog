@@ -74,11 +74,14 @@ class Blog extends CI_Model {
     return $querry;
   }
 
-  public function getBlogs(){
+  public function getBlogs($category){
     $this->db->select('user.nick as author, blog.name, blog.creation_date, blog_category.name as category');
     $this->db->from('blog');
     $this->db->join('user', 'user.user_id = blog.user_id');
     $this->db->join('blog_category', 'blog_category.blog_category_id = blog.blog_category_id');
+    if ($category > 0){
+      $this->db->where('blog.blog_category_id', $category);
+    }
     $this->db->order_by('blog.name', 'ASC');
     $querry = $this->db->get()->result();
     return $querry;

@@ -128,8 +128,8 @@ const getUsers = function() {
   return apiClient().get('/index.php?/API/UserController/getUsers');
 }
 
-const getBlogs = function(){
-  return apiClient().get('/index.php?/API/BlogController/getBlogs');
+const getBlogs = function(category = '0'){
+  return apiClient().get('/index.php?/API/BlogController/getBlogs/' + category);
 }
 
 const addComment = function(article, _comment) {

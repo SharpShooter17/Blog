@@ -69,7 +69,7 @@ export class Blog extends React.Component {
               {this.state.articles.map( article => <tr>
                   <td><Link to={'/User/'+this.props.match.params.user+'/'+this.props.match.params.blog+'/'+article.article_id}>{article.title}</Link></td>
                   <td>{article.date}</td>
-                  <td>{article.category_id}</td>
+                  <td>{article.category}</td>
                 </tr>
               )}
               </tbody>

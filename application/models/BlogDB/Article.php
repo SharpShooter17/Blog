@@ -24,10 +24,11 @@ class Article extends CI_Model
   }
 
   public function getArticles($blog_id) {
-    $this->db->select('date, category_id, title, article_id');
+    $this->db->select('article.date, article.category_id, article.title, article.article_id, category.name as category');
     $this->db->from('article');
-    $this->db->where('blog_id', $blog_id);
-    $this->db->order_by('date', 'ASC');
+    $this->db->join('category', 'article.category_id = category.category_id');
+    $this->db->where('article.blog_id', $blog_id);
+    $this->db->order_by('article.date', 'ASC');
     $querry = $this->db->get()->result();
     return $querry;
   }
