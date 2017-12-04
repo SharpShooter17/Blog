@@ -50,8 +50,13 @@ class Article extends CI_Model
   }
 
   public function getArticle($id){
+    $this->db->select('article_id, title, content, date, category.name as category, blog.name as blog, user.nick');
+    $this->db->from('article');
+    $this->db->join('category', 'article.category_id = category.category_id');
+    $this->db->join('blog', 'blog.blog_id = article.blog_id');
+    $this->db->join('user', 'blog.user_id = user.user_id');
     $this->db->where('article_id', $id);
-    return $this->db->get('article')->result();
+    return $this->db->get()->result();
   }
 
 }
