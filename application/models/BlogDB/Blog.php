@@ -67,7 +67,6 @@ class Blog extends CI_Model {
   public function getBlogDetails($blog){
     $this->db->select('user.nick, blog.name, blog.last_modification, blog.creation_date, blog.blog_id, blog_category.name as blogCategory, blog_category.blog_category_id');
     $this->db->from('blog');
-    $this->db->join('category', 'category.blog_id = blog.blog_id');
     $this->db->join('user', 'user.user_id = blog.user_id');
     $this->db->join('blog_category', 'blog_category.blog_category_id = blog.blog_category_id');
     $this->db->where('blog.name', $blog);

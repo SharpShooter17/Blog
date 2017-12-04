@@ -11,12 +11,14 @@ export class User extends React.Component {
       nick: props.match.params.user,
       id: '',
       email: '',
-      role: ''
+      role: '',
+      blogs: []
     }
   }
 
   componentWillMount(){
     Api.getUserDetails(this, this.state.nick);
+    Api.getUserBlogs(this);
   }
 
   render(){
@@ -35,6 +37,23 @@ export class User extends React.Component {
         <div className="row">
           <div className="col">
             <h3 className="p-3">Blogi użytkownika:</h3>
+            <table className="table table-striped">
+              <thead>
+                <tr>
+                  <th>Nazwa</th>
+                  <th>Data utworzenia</th>
+                  <th>Kategoria bloga</th>
+                </tr>
+              </thead>
+              <tbody>
+              {this.state.blogs.map( blog => <tr>
+                  <td><Link to={'/User/'+this.props.match.params.user+'/'+blog.name}>{blog.name}</Link></td>
+                  <td>{blog.creation_date}</td>
+                  <td>{blog.blog_category_id}</td>
+                </tr>
+              )}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

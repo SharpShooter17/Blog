@@ -22,6 +22,7 @@ export class Blog extends React.Component {
   componentWillMount(){
     const blogDetails = Api.getBlogDetails(this.state.name);
     blogDetails.then(function(response) {
+      if (typeof response.data.results !== 'undefined'){
       this.setState({
         nick: response.data.results.nick,
         name: response.data.results.name,
@@ -32,7 +33,7 @@ export class Blog extends React.Component {
         blog_category: response.data.results.blogCategory
       })
       Api.getBlogArticles(this, response.data.results.blog_id);
-    }.bind(this))
+    }}.bind(this))
   }
 
   componentDidMount() {
