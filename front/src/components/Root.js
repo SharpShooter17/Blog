@@ -8,6 +8,7 @@ import { Register } from './Register'
 import { ControllPanel } from './ControllPanel'
 import { User } from './User'
 import { Blog } from './Blog'
+import { Article } from './Article'
 
 import '../css/bootstrap.css'
 
@@ -29,8 +30,9 @@ export class Root extends Component {
               <Route exact path={'/Login'} component={ Login } />
               <Route exact path={'/Register'} component={ Register } />
               <Route path={'/ControllPanel'} component={ ControllPanel } />
-              <Route path={'/User/:user'} component={User} />
-              <Route path={'/Blog/:blog'} component={Blog} />
+              <Route exact path={'/User/:user'} component={User} />
+              <Route exact path={'/User/:user/:blog'} component={Blog} />
+              <Route exact path={'/User/:user/:blog/:article'} component={Article} />
             </Switch>
           </main>
         </div>

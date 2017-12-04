@@ -41,7 +41,7 @@ class ArticleController extends CI_Controller {
 
   public function getArticles($blog_id){
     header('Content-Type: application/json');
-    echo json_encode($this->article->getArticles($blog_id));
+    echo json_encode(array('results' => $this->article->getArticles($blog_id)));
   }
 
   public function getContent($article_id){

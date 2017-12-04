@@ -34,7 +34,7 @@ export class Home extends Component {
               <div className="row">
                 <div className="col-3 p-1 bg-secondary text-light">
                   <span>Kategoria bloga: <strong>{article.blogCategory}</strong></span><br />
-                  <span>Nazwa Bloga: <strong><Link to={'Blog/' + article.blog}>{article.blog}</Link></strong></span><br />
+                  <span>Nazwa Bloga: <strong><Link to={'/User/' + article.nick + '/'+ article.blog}>{article.blog}</Link></strong></span><br />
                   <span>Z kategorii: <strong>{article.kategoria}</strong></span><br />
                   <span>Autor: <strong><Link to={'/User/' + article.nick}>{article.nick}</Link></strong></span><br />
                   <span>Data dodania: <strong>{article.date}</strong></span><br />

@@ -130,20 +130,17 @@ const getUserDetails = function (obj, nick){
     });
 }
 
-const getBlogDetails = function(obj, blog){
-  axios.post(baseURL + '/index.php?/API/BlogController/getBlogDetails/', querystring.stringify({
+const getBlogDetails = function(blog){
+  return axios.post(baseURL + '/index.php?/API/BlogController/getBlogDetails/', querystring.stringify({
     name: blog
   }))
-  .then(response => { console.log(response.data.results)
+}
+
+const getBlogArticles = function(obj, blog_id){
+  apiClient().get('/index.php?/API/ArticleController/getArticles/' + blog_id)
+  .then(response => {
     obj.setState({
-      nick: response.data.results.nick,
-      name: response.data.results.name,
-      last_modification: response.data.results.last_modification,
-      creation_date: response.data.results.creation_date,
-      blog_id: response.data.results.blog_id,
-      articles: response.data.results.email,
-      blog_category_id: response.data.results.blog_category_id,
-      blog_category: response.data.results.blogCategory
+      articles: response.data.results
     })
     })
     .catch(error => {
@@ -153,4 +150,5 @@ const getBlogDetails = function(obj, blog){
 
 export default {getBlogCategories, getUserBlogs, getCategories,
                 addBlog, addCategory, addArticle,
-                getLastestArticles, getUserDetails, getBlogDetails}
+                getLastestArticles, getUserDetails, getBlogDetails,
+                getBlogArticles}

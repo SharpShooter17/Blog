@@ -28,7 +28,7 @@ render() {
       <ul className="nav">
         <li className="nav-item"><Link className="nav-link" to="/Home">Strona główna</Link></li>
         <li className="nav-item"><Link className="nav-link" to="/Register">Rejestracja</Link></li>
-        <li className="nav-item"><Link className="nav-link" to="Login">Logowanie</Link></li>
+        <li className="nav-item"><Link className="nav-link" to="/Login">Logowanie</Link></li>
       </ul>
     );
   }
