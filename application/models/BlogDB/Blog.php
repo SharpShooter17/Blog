@@ -12,8 +12,12 @@ class Blog extends CI_Model {
   }
 
   public function getUserBlogs($user_id){
-    $this->db->where('user_id', $user_id);
-    return $this->db->get('blog')->result();
+    $this->db->select('blog.*, blog_category.name as category');
+    $this->db->from('blog');
+    $this->db->join('blog_category', 'blog_category.blog_category_id = blog.blog_category_id');
+    $this->db->where('blog.user_id', $user_id);
+    $this->db->order_by('blog.creation_date', 'DESC');
+    return $this->db->get()->result();
   }
 
   public function addBlog($user_id, $blog_category_id, $name, $last_modification, $creation_date) {
