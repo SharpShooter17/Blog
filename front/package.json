@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@tinymce/tinymce-react": "^2.0.3",
     "axios": "^0.17.1",
     "froala-editor": "^2.7.2",
     "jQuery": "^1.7.4",

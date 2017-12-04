@@ -12,7 +12,7 @@ class ArticleController extends CI_Controller {
   }
 
   public function addArticle(){
-    $user = $this->input->post('token');
+    $user = $_POST['token'];
     $user = $this->token->tokenIsValid($user);
 
     if (is_numeric($user)){
@@ -74,7 +74,11 @@ class ArticleController extends CI_Controller {
       return;
     }
     header('Content-Type: application/json');
-    echo json_encode( array('article' => $article[0] ) );
+    echo json_encode( array('article' => $article[0] ), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE );
+  }
+  public function getArticleContent($id){
+    header('Content-Type: text/html; charset=utf-8');
+    echo $this->article->getArticleContent($id);
   }
 }
 

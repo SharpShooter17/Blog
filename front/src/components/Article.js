@@ -9,6 +9,8 @@ export class Article extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clearForm = this.clearForm.bind(this);
+    this.getArticleContent = this.getArticleContent.bind(this);
+
     this.state = {
       content: '',
       date: '',
@@ -35,7 +37,6 @@ export class Article extends React.Component {
     const article = Api.getArticle(this.props.match.params.article)
     article.then(function(response) {
       this.setState({
-        content: response.data.article.content,
         date: response.data.article.date,
         title: response.data.article.title,
         author: response.data.article.nick,
@@ -48,6 +49,20 @@ export class Article extends React.Component {
   componentWillMount(){
     this.getArticle();
     this.getComments();
+    this.getArticleContent();
+  }
+
+  getArticleContent() {
+    Api.getArticleContent(this.props.match.params.article)
+    .then( function(response) {
+      this.setState({
+        content: response.data
+      })
+    }.bind(this))
+  }
+
+  componentDidMount(){
+
   }
 
   handleSubmit(e){
@@ -95,11 +110,7 @@ export class Article extends React.Component {
           </div>
         </div>
         <div className="row">
-          <div className="col">
-          <p>
-            {this.state.content}
-          </p>
-          </div>
+          <div className="col" id="articleContent" dangerouslySetInnerHTML={{__html: this.state.content}} />
         </div>
         <div className="row">
           <div className="col">
@@ -114,7 +125,7 @@ export class Article extends React.Component {
               <div className="form-group">
                 <label className="col control-label" htmlFor="comment">Komentarz</label>
                 <div className="col">
-                  <textarea require="" rows="5" placeholder="Twój komentarz" maxlength="300" className="form-control" id="comment" name="comment"></textarea>
+                  <textarea require="" rows="5" placeholder="Twój komentarz" maxLength="300" className="form-control" id="comment" name="comment"></textarea>
                 </div>
               </div>
 

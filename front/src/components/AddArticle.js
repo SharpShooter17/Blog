@@ -1,6 +1,7 @@
 import React from 'react'
 import Api from './Api';
 import Cookies from 'js-cookie'
+import { Editor } from '@tinymce/tinymce-react';
 
 export default class AddArticle extends React.Component {
   constructor(props){
@@ -11,8 +12,17 @@ export default class AddArticle extends React.Component {
 
     this.state = {
       blogs: [],
-      categories: [{category_id: '', name: ''}]
+      categories: [{category_id: '', name: ''}],
+      content: ''
     }
+
+    this.handleEditorChange = this.handleEditorChange.bind(this);
+  }
+
+  handleEditorChange = (e) => {
+    this.setState({
+      content: e.target.getContent()
+    })
   }
 
   componentWillMount(){
@@ -27,15 +37,35 @@ export default class AddArticle extends React.Component {
     Api.getCategories(this, e.target.value)
   }
 
+  clearForm(){
+    document.getElementById('content').value = ""
+    document.getElementById('title').value = ""
+  }
+
   handleSubmit(e) {
     e.preventDefault();
 
     const blog_id = e.target.blog.value;
     const category_id = e.target.category.value;
     const title = e.target.title.value;
-    const content = e.target.content.value;
+    const content = this.state.content; //e.target.content.value;
 
-    Api.addArticle(this, blog_id, category_id, title, content);
+    Api.addArticle(blog_id, category_id, title, content)
+    .then( function(response) {
+      if ( response.data.response == 'true' ){
+        this.setState({
+          msg: 'Dodano post!'
+        })
+        this.clearForm()
+      } else {
+        this.setState({
+          msg: response.data.response
+        })
+      }
+    }.bind(this))
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   render(){
@@ -73,13 +103,15 @@ export default class AddArticle extends React.Component {
             <span className="help-block">Wpisz tytuł artykułu</span>
             </div>
           </div>
-
-          <div className="form-group">
-            <label className="col-md-4 control-label" htmlFor="content">Treść</label>
-            <div className="col">
-              <textarea className="form-control" id="content" name="content">Treść Twojego artykułu</textarea>
-            </div>
-          </div>
+          <span className="text-info">{this.state.msg}</span>
+          <Editor
+              initialValue="<p>This is the initial content of the editor</p>"
+              init={{
+                plugins: 'link image code',
+                toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+              }}
+              onChange={this.handleEditorChange}
+            />
 
           <div className="form-group">
             <label className="col-md-4 control-label" htmlFor="submit"></label>
@@ -87,10 +119,15 @@ export default class AddArticle extends React.Component {
               <button onClick={event => {this.onSubmit;}} id="submit" name="submit" className="btn btn-success">Dodaj artykuł</button>
             </div>
           </div>
-
           </fieldset>
         </form>
       </div>
     )
   }
 }
+/*          <div className="form-group">
+            <label className="col-md-4 control-label" htmlFor="content">Treść</label>
+            <div className="col">
+              <textarea rows="15" wrap="hard" placeholder="Treść Twojego artykułu" className="form-control" id="content" name="content"></textarea>
+            </div>
+          </div>*/

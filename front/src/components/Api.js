@@ -74,22 +74,15 @@ const addCategory = function (obj, blog_id, name){
       });
 }
 
-const addArticle = function (obj, _blog_id, _category_id, _title, _content){
-  axios.post(baseURL + '/index.php?/API/ArticleController/addArticle', querystring.stringify({
+const addArticle = function (_blog_id, _category_id, _title, _content){
+  return axios.post(baseURL + '/index.php?/API/ArticleController/addArticle', querystring.stringify({
       token: Cookies.get('token'),
       blog_id: _blog_id,
       category_id: _category_id,
       title: _title,
       content: _content
   }))
-    .then(response => {
-      obj.setState({
-        msg: response.data.results
-      })
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+
 }
 
 const getLastestArticles = function (obj, count, page, wordsLimit){
@@ -151,8 +144,12 @@ const getComments = function(article){
   return apiClient().get('/index.php?/API/CommentsController/getComments/' + article);
 }
 
+const getArticleContent = function(id){
+  return apiClient().get('/index.php?/API/ArticleController/getArticleContent/' + id)
+}
+
 export default {getBlogCategories, getUserBlogs, getCategories,
                 addBlog, addCategory, addArticle,
                 getLastestArticles, getUserDetails, getBlogDetails,
                 getBlogArticles, getArticle, getUsers, getBlogs,
-                addComment, getComments}
+                addComment, getComments, getArticleContent}

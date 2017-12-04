@@ -18,7 +18,7 @@ class Article extends CI_Model
     $this->date = $date;
     $this->category_id = $category_id;
     $this->title = $title;
-    $this->content = $content;
+    $this->content = htmlspecialchars($content, ENT_HTML5);
 
     return $this->db->insert('article', $this) ? 1 : 0;
   }
@@ -28,7 +28,8 @@ class Article extends CI_Model
     $this->db->from('article');
     $this->db->where('blog_id', $blog_id);
     $this->db->order_by('date', 'ASC');
-    return $this->db->get()->result();
+    $querry = $this->db->get()->result();
+    return $querry;
   }
 
   public function getContent($article_id){
@@ -51,13 +52,21 @@ class Article extends CI_Model
   }
 
   public function getArticle($id){
-    $this->db->select('article_id, title, content, date, category.name as category, blog.name as blog, user.nick');
+    $this->db->select('article_id, title, date, category.name as category, blog.name as blog, user.nick');
     $this->db->from('article');
     $this->db->join('category', 'article.category_id = category.category_id');
     $this->db->join('blog', 'blog.blog_id = article.blog_id');
     $this->db->join('user', 'blog.user_id = user.user_id');
     $this->db->where('article_id', $id);
-    return $this->db->get()->result();
+    $querry = $this->db->get()->result();
+    return $querry;
+  }
+
+  public function getArticleContent($id){
+    $this->db->select('content');
+    $this->db->where('article_id', $id);
+    //$querry[0]->content = htmlspecialchars_decode($querry[0]->content, ENT_HTML5);
+    return htmlspecialchars_decode($this->db->get('article')->result()[0]->content, ENT_HTML5);
   }
 
 }
