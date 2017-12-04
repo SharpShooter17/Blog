@@ -27,7 +27,7 @@ export class Home extends Component {
               <div className="row">
                 <div className="col-12 bg-dark">
                   <div className="p-4">
-                    <h4 className="text-light"><b>{article.title}</b></h4>
+                    <h4 className="text-light"><b>{<Link to={'/User/' + article.nick + '/' + article.blog + '/' + article.article_id}>{article.title}</Link>}</b></h4>
                   </div>
                 </div>
               </div>
