@@ -147,8 +147,12 @@ const addComment = function(article, _comment) {
   }))
 }
 
+const getComments = function(article){
+  return apiClient().get('/index.php?/API/CommentsController/getComments/' + article);
+}
+
 export default {getBlogCategories, getUserBlogs, getCategories,
                 addBlog, addCategory, addArticle,
                 getLastestArticles, getUserDetails, getBlogDetails,
                 getBlogArticles, getArticle, getUsers, getBlogs,
-                addComment}
+                addComment, getComments}

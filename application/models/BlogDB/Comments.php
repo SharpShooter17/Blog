@@ -20,6 +20,14 @@ class Comments extends CI_Model
     $this->date = mdate($this->getFormat(), time());
     return $this->db->insert('comments', $this) ? 1 : 0;
   }
+
+  public function getComments($article){
+    $this->db->select('user.nick, comment, date');
+    $this->db->from('comments');
+    $this->db->join('user', 'user.user_id = comments.user_id');
+    $this->db->where('article_id', $article);
+    return $this->db->get()->result();
+  }
 }
 
 ?>

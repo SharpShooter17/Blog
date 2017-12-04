@@ -17,6 +17,7 @@ export class Article extends React.Component {
       category: '',
       blog: '',
       msg: '',
+      comments: []
     }
   }
 
@@ -30,6 +31,12 @@ export class Article extends React.Component {
         author: response.data.article.nick,
         blog: response.data.article.blog,
         category: response.data.article.category
+      })
+    }.bind(this))
+    Api.getComments(this.props.match.params.article)
+    .then(function(response){
+      this.setState({
+        comments: response.data.results
       })
     }.bind(this))
   }
@@ -100,6 +107,20 @@ export class Article extends React.Component {
               </fieldset>
             </form>
             : ''}
+            {this.state.comments.map(comment => <div className="m-4">
+                <div className="row bg-secondary">
+                  <div className="col p-3">
+                    <span><Link className="text-warning" to={'/User/' + comment.nick}>{comment.nick}</Link></span>
+                    <span> {comment.date}</span>
+                  </div>
+                </div>
+                <div className="row bg-light">
+                  <div className="col p-3">
+                    <p>{comment.comment}</p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

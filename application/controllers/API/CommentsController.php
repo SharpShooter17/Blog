@@ -27,6 +27,11 @@ class CommentsController extends CI_Controller {
     echo $this->statements->getJson($result);
   }
 
+  public function getComments($article){
+    header('Content-Type: application/json');
+    echo json_encode(array('results' => $this->comments->getComments($article) ));
+  }
+
 }
 
 ?>
