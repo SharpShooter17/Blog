@@ -135,7 +135,11 @@ const getUsers = function() {
   return apiClient().get('/index.php?/API/UserController/getUsers');
 }
 
+const getBlogs = function(){
+  return apiClient().get('/index.php?/API/BlogController/getBlogs');
+}
+
 export default {getBlogCategories, getUserBlogs, getCategories,
                 addBlog, addCategory, addArticle,
                 getLastestArticles, getUserDetails, getBlogDetails,
-                getBlogArticles, getArticle, getUsers}
+                getBlogArticles, getArticle, getUsers, getBlogs}

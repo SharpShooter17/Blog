@@ -27,6 +27,7 @@ class Article extends CI_Model
     $this->db->select('date, category_id, title, article_id');
     $this->db->from('article');
     $this->db->where('blog_id', $blog_id);
+    $this->db->order_by('date', 'ASC');
     return $this->db->get()->result();
   }
 

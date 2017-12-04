@@ -1,12 +1,16 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import AddBlog from './AddBlog'
 import AddCategory from './AddCategory'
 import AddArticle from './AddArticle'
 import { Link } from 'react-router-dom'
+import Cookies from 'js-cookie';
 
 export class ControllPanel extends React.Component {
   render(){
+    if (Cookies.get('logged') != 'true'){
+      return (<Redirect to="/Login" />)
+    }
     return (
       <div>
         <h1 className="p-5">Panel sterowania</h1>

@@ -10,6 +10,7 @@ import { User } from './User'
 import { Blog } from './Blog'
 import { Article } from './Article'
 import { Users } from './Users'
+import { Blogs } from './Blogs'
 
 import '../css/bootstrap.css'
 
@@ -35,6 +36,7 @@ export class Root extends Component {
               <Route exact path={'/User/:user/:blog'} component={Blog} />
               <Route exact path={'/User/:user/:blog/:article'} component={Article} />
               <Route exact path={'/Users'} component={Users} />
+              <Route exact path={'/Blogs'} component={Blogs} />
             </Switch>
           </main>
         </div>

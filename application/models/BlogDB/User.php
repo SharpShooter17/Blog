@@ -25,6 +25,7 @@ class User extends CI_Model {
     $this->db->select('user_id, nick, email, role.name as role');
     $this->db->from('user');
     $this->db->join('role', 'user.role_id = role.role_id');
+    $this->db->order_by('nick', 'ASC');
     return $this->db->get()->result();
   }
 
