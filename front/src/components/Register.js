@@ -155,7 +155,7 @@ export class Register extends Component {
             <span className="text-danger">{this.state.msgFromServer}</span>
           </div>
           <div className="form-group">
-            <label className="col-md-4 control-label" for="email">email</label>
+            <label className="col-md-4 control-label" htmlFor="email">email</label>
             <div className="col-md-4">
             <input onChange={this.updateEmail} value={this.state.email} id="email" name="email" type="text" placeholder="Jan.Kowalski@poczta.pl" className="form-control input-md" />
             <div className="text-danger">{this.state.msgEmail}</div>
@@ -164,7 +164,7 @@ export class Register extends Component {
           </div>
 
           <div className="form-group">
-            <label className="col-md-4 control-label" for="nick">Nick</label>
+            <label className="col-md-4 control-label" htmlFor="nick">Nick</label>
             <div className="col-md-4">
             <input onChange={this.updateNick} value={this.state.nick} id="nick" name="nick" type="text" placeholder="Mój_nick" className="form-control input-md" />
             <div className="text-danger">{this.state.msgNick}</div>
@@ -173,7 +173,7 @@ export class Register extends Component {
           </div>
 
           <div className="form-group">
-            <label className="col-md-4 control-label" for="password">Hasło</label>
+            <label className="col-md-4 control-label" htmlFor="password">Hasło</label>
             <div className="col-md-4">
               <input onChange={this.updatePassword} value={this.state.password} id="password" name="password" type="password" placeholder="hasło" className="form-control input-md" />
               <div className="text-danger">{this.state.msgPassword}</div>
@@ -182,7 +182,7 @@ export class Register extends Component {
           </div>
 
           <div className="form-group">
-            <label className="col-md-4 control-label" for="confimPassword">Potwierdź hasło</label>
+            <label className="col-md-4 control-label" htmlFor="confimPassword">Potwierdź hasło</label>
             <div className="col-md-4">
               <input onChange={this.updateConfirmPassword} value={this.state.confirmPassword} id="confimPassword" name="confimPassword" type="password" placeholder="hasło" className="form-control input-md" />
               <div className="text-danger">{this.state.msgConfirmPassword}</div>
@@ -191,7 +191,7 @@ export class Register extends Component {
           </div>
 
           <div className="form-group">
-            <label className="col-md-4 control-label" for="buttonRegister"></label>
+            <label className="col-md-4 control-label" htmlFor="buttonRegister"></label>
             <div className="col-md-8">
               <button onClick={event => {this.onSubmit;}} id="buttonRegister" name="buttonRegister" className="btn btn-success">Zarejestruj się</button>
               <button onClick={this.clearData} id="buttonReset" name="buttonReset" className="btn btn-danger">Resetuj</button>

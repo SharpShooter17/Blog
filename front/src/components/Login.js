@@ -84,7 +84,7 @@ export class Login extends Component {
           <legend>Logowanie</legend>
 
           <div className="form-group">
-            <label className="col-md-4 control-label" for="textinput">Email:</label>
+            <label className="col-md-4 control-label" htmlFor="textinput">Email:</label>
             <div className="col-md-4">
             <input onChange={this.updateEmail} value={this.state.email} id="textinput" name="textinput" type="text" placeholder="jan.kowalski@poczta.pl" className="form-control input-md" required="" />
             <span className="help-block">Wpisz swój email, który podawałeś przy rejestracji.</span>
@@ -92,7 +92,7 @@ export class Login extends Component {
           </div>
 
           <div className="form-group">
-            <label className="col-md-4 control-label" for="password">Hasło:</label>
+            <label className="col-md-4 control-label" htmlFor="password">Hasło:</label>
             <div className="col-md-4">
               <input onChange={this.updatePassword} value={this.state.password} id="password" name="password" type="password" placeholder="hasło" className="form-control input-md" required="" />
               <span className="help-block">Wpisz hasło.</span>
@@ -100,7 +100,7 @@ export class Login extends Component {
           </div>
 
           <div className="form-group">
-            <label className="col-md-4 control-label" for="login"></label>
+            <label className="col-md-4 control-label" htmlFor="login"></label>
             <div className="col-md-8">
               <button onClick={event => {this.onSubmit;}} id="login" name="login" className="btn btn-success">Zaloguj się</button>
             </div>

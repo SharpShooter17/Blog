@@ -39,7 +39,7 @@ export class AddBlog extends React.Component{
         <legend>Dodaj blog</legend>
 
         <div className="form-group">
-        <label className="col-md-4 control-label" for="blogName">Nazwa bloga</label>
+        <label className="col-md-4 control-label" htmlFor="blogName">Nazwa bloga</label>
         <div className="col-md-4">
         <input id="blogName" name="blogName" type="text" placeholder="nazwa" className="form-control input-md" required="" />
         <span className="help-block">Wpisz nazwę swojego bloga. Każda spacja zostanie zamieniona na '_'</span>
@@ -47,7 +47,7 @@ export class AddBlog extends React.Component{
         </div>
 
         <div className="form-group">
-        <label class="col-md-4 control-label" for="categories">Kategoria</label>
+        <label class="col-md-4 control-label" htmlFor="categories">Kategoria</label>
         <div class="col-md-4">
           <select id="category" name="category" class="form-control">
             <option value="0" selected="" disabled="">Wybierz kategorię</option>
@@ -57,7 +57,7 @@ export class AddBlog extends React.Component{
         </div>
 
         <div class="form-group">
-        <label class="col-md-4 control-label" for="submit"></label>
+        <label class="col-md-4 control-label" htmlFor="submit"></label>
         <div class="col-md-4">
           <button onClick={event => {this.onSubmit;}} id="button" name="button" class="btn btn-success">Stwórz blog</button>
         </div>

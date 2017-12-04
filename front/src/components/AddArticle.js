@@ -47,7 +47,7 @@ export default class AddArticle extends React.Component {
           <legend>Dodaj artykuł</legend>
 
           <div className="form-group">
-            <label className="col-md-4 control-label" for="blog">Blog</label>
+            <label className="col-md-4 control-label" htmlFor="blog">Blog</label>
             <div className="col-md-4">
               <select onChange={this.updateCategory} id="blog" name="blog" className="form-control" required="">
                 <option value="0" selected="" disabled="">Wybierz blog</option>
@@ -57,7 +57,7 @@ export default class AddArticle extends React.Component {
           </div>
 
           <div className="form-group">
-            <label className="col-md-4 control-label" for="category">Kategoria</label>
+            <label className="col-md-4 control-label" htmlFor="category">Kategoria</label>
             <div className="col-md-4">
               <select id="category" name="category" className="form-control" required="">
                 <option value="0" selected="" disabled="">Wybierz kategorię</option>
@@ -67,7 +67,7 @@ export default class AddArticle extends React.Component {
           </div>
 
           <div className="form-group">
-            <label className="col-md-4 control-label" for="title">Tytuł</label>
+            <label className="col-md-4 control-label" htmlFor="title">Tytuł</label>
             <div className="col-md-4">
             <input id="title" name="title" type="text" placeholder="tutuł" className="form-control input-md" required="" />
             <span className="help-block">Wpisz tytuł artykułu</span>
@@ -75,14 +75,14 @@ export default class AddArticle extends React.Component {
           </div>
 
           <div className="form-group">
-            <label className="col-md-4 control-label" for="content">Treść</label>
+            <label className="col-md-4 control-label" htmlFor="content">Treść</label>
             <div className="col">
               <textarea className="form-control" id="content" name="content">Treść Twojego artykułu</textarea>
             </div>
           </div>
 
           <div className="form-group">
-            <label className="col-md-4 control-label" for="submit"></label>
+            <label className="col-md-4 control-label" htmlFor="submit"></label>
             <div className="col-md-4">
               <button onClick={event => {this.onSubmit;}} id="submit" name="submit" className="btn btn-success">Dodaj artykuł</button>
             </div>
