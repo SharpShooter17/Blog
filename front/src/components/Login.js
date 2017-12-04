@@ -48,7 +48,6 @@ export class Login extends Component {
         serverMsg: "Nie poprawny EMAIL!"
       });
     }
-    alert('stop');
   }
 
   updateEmail = e => {

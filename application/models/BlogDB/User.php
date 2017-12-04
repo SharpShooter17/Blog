@@ -22,7 +22,10 @@ class User extends CI_Model {
   }
 
   public function getUsers(){
-    return $this->db->get('user')->result();
+    $this->db->select('user_id, nick, email, role.name as role');
+    $this->db->from('user');
+    $this->db->join('role', 'user.role_id = role.role_id');
+    return $this->db->get()->result();
   }
 
   private function exists($var, $collumn){

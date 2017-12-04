@@ -34,7 +34,7 @@ export class Root extends Component {
               <Route exact path={'/User/:user'} component={User} />
               <Route exact path={'/User/:user/:blog'} component={Blog} />
               <Route exact path={'/User/:user/:blog/:article'} component={Article} />
-              <Route exact path={'/User'} component={Users} />
+              <Route exact path={'/Users'} component={Users} />
             </Switch>
           </main>
         </div>

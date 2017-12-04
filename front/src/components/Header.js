@@ -12,6 +12,7 @@ constructor(props){
 handleLogOut(){
   Cookies.remove('token');
   Cookies.remove('logged');
+  Cookies.remove('id');
 }
 
 render() {
