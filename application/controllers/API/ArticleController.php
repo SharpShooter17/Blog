@@ -28,6 +28,7 @@ class ArticleController extends CI_Controller {
     $content =  $this->input->post('content');
 
     if (!$this->blog->userHasBlog($user, $blog_id)){
+      header('Content-Type: application/json');
       echo $this->statements->getJson(7);
       return;
     }
@@ -62,7 +63,18 @@ class ArticleController extends CI_Controller {
           $result[$i]->content = substr($result[$i]->content, 0, $wordsLimit) . $dots;
         }
       }
+      header('Content-Type: application/json');
       echo json_encode($result);
+  }
+
+  public function getArticle($id){
+    $article = $this->article->getArticle($id);
+    if (count($article) == 0){
+      echo $this->statements->getJson(0);
+      return;
+    }
+    header('Content-Type: application/json');
+    echo json_encode( array('article' => $article[0] ) );
   }
 }
 

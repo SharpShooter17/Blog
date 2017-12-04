@@ -49,6 +49,11 @@ class Article extends CI_Model
     return $querry;
   }
 
+  public function getArticle($id){
+    $this->db->where('article_id', $id);
+    return $this->db->get('article')->result();
+  }
+
 }
 
 ?>

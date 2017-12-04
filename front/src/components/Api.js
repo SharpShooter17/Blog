@@ -148,7 +148,11 @@ const getBlogArticles = function(obj, blog_id){
     });
 }
 
+const getArticle = function(id){
+  return apiClient().get('/index.php?/API/ArticleController/getArticle/' + id)
+}
+
 export default {getBlogCategories, getUserBlogs, getCategories,
                 addBlog, addCategory, addArticle,
                 getLastestArticles, getUserDetails, getBlogDetails,
-                getBlogArticles}
+                getBlogArticles, getArticle}
