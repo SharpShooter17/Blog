@@ -12,7 +12,9 @@ class Statements extends CI_Model {
     5 => 'Email does not exists in database',
     6 => 'Wrong password',
     7 => 'Unauthorized action',
-    8 => 'Category exists'
+    8 => 'Category exists',
+    9 => 'Too many characters',
+    10 => 'Comment is too short'
   );
 
   public function getJson($index) {

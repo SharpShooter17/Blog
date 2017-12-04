@@ -17,7 +17,8 @@ export class Article extends React.Component {
       category: '',
       blog: '',
       msg: '',
-      comments: []
+      comments: [],
+      characters: 300
     }
   }
 
@@ -61,6 +62,10 @@ export class Article extends React.Component {
         this.getComments();
         this.setState({
           msg: ''
+        })
+      } else if (response.data.response == 'Comment is too short') {
+        this.setState({
+          msg: 'Komentarz jest za krótki'
         })
       } else {
         this.setState({
@@ -109,7 +114,7 @@ export class Article extends React.Component {
               <div className="form-group">
                 <label className="col control-label" htmlFor="comment">Komentarz</label>
                 <div className="col">
-                  <textarea className="form-control" id="comment" name="comment"></textarea>
+                  <textarea require="" rows="5" placeholder="Twój komentarz" maxlength="300" className="form-control" id="comment" name="comment"></textarea>
                 </div>
               </div>
 

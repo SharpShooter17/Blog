@@ -13,6 +13,13 @@ class Comments extends CI_Model
   }
 
   public function addComment($user_id, $article_id, $comment){
+    $comment = trim($comment);
+    $len = strlen($comment);
+    if ($len > 300){
+      return 9;
+    } else if ($len < 2) {
+      return 10;
+    }
     $this->load->helper('date');
     $this->user_id = $user_id;
     $this->article_id = $article_id.
