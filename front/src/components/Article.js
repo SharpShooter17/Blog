@@ -21,7 +21,16 @@ export class Article extends React.Component {
     }
   }
 
-  componentWillMount(){
+  getComments(){
+    Api.getComments(this.props.match.params.article)
+    .then(function(response){
+      this.setState({
+        comments: response.data.results
+      })
+    }.bind(this))
+  }
+
+  getArticle(){
     const article = Api.getArticle(this.props.match.params.article)
     article.then(function(response) {
       this.setState({
@@ -33,12 +42,11 @@ export class Article extends React.Component {
         category: response.data.article.category
       })
     }.bind(this))
-    Api.getComments(this.props.match.params.article)
-    .then(function(response){
-      this.setState({
-        comments: response.data.results
-      })
-    }.bind(this))
+  }
+
+  componentWillMount(){
+    this.getArticle();
+    this.getComments();
   }
 
   handleSubmit(e){
@@ -50,6 +58,14 @@ export class Article extends React.Component {
       })
       if (response.data.response == 'true'){
         this.clearForm();
+        this.getComments();
+        this.setState({
+          msg: ''
+        })
+      } else {
+        this.setState({
+          msg: 'Nie udało się dodać komentarza. Spróbuj jescze raz!'
+        })
       }
     }.bind(this))
   }
@@ -105,6 +121,7 @@ export class Article extends React.Component {
               </div>
 
               </fieldset>
+              <span className="text-danger">{this.state.msg}</span>
             </form>
             : ''}
             {this.state.comments.map(comment => <div className="m-4">

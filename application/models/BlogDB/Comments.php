@@ -26,6 +26,7 @@ class Comments extends CI_Model
     $this->db->from('comments');
     $this->db->join('user', 'user.user_id = comments.user_id');
     $this->db->where('article_id', $article);
+    $this->db->order_by('date', 'DESC');
     return $this->db->get()->result();
   }
 }
