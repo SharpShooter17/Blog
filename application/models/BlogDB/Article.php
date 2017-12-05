@@ -47,8 +47,11 @@ class Article extends CI_Model
     $this->db->join('blog', 'blog.blog_id = category.blog_id');
     $this->db->join('blog_category', 'blog.blog_category_id = blog_category.blog_category_id');
     $this->db->join('user', 'user.user_id = blog.user_id');
-
+    $this->db->order_by('article.date', 'ASC');
     $querry = $this->db->get()->result();
+    foreach ($querry as $article) {
+      $article->content = htmlspecialchars_decode($article->content);
+    }
     return $querry;
   }
 

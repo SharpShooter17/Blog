@@ -40,7 +40,9 @@ export class Home extends Component {
                   <span>Data dodania: <strong>{article.date}</strong></span><br />
                 </div>
                 <div className="col lead bg-light">
-                  <article className="p-3" dangerouslySetInnerHTML={{__html: article.content}} />
+                  <article className="p-3">
+                    <div dangerouslySetInnerHTML={{__html: article.content}} />
+                  </article>
                 </div>
               </div>
             </div>
