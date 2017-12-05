@@ -2,6 +2,7 @@ import React from 'react'
 import Api from './Api';
 import Cookies from 'js-cookie'
 import { Editor } from '@tinymce/tinymce-react';
+import '../css/chip.css'
 
 export default class AddArticle extends React.Component {
   constructor(props){
@@ -9,11 +10,13 @@ export default class AddArticle extends React.Component {
 
     this.updateCategory = this.updateCategory.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
+    this.handleTagButton = this.handleTagButton.bind(this);
+    this.removeTag = this.removeTag.bind(this);
     this.state = {
       blogs: [],
       categories: [{category_id: '', name: ''}],
-      content: ''
+      content: '',
+      tags: []
     }
 
     this.handleEditorChange = this.handleEditorChange.bind(this);
@@ -68,7 +71,12 @@ export default class AddArticle extends React.Component {
     });
   }
 
+  searchUpdated (term) {
+    this.setState({searchTerm: term})
+  }
+
   render(){
+    //const filteredTags = this.state.tags.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS, {caseSensitive: false, fuzzy:true, sortResults: true}))
     return(
       <div>
         <form onSubmit={this.handleSubmit} className="form-horizontal">
@@ -113,21 +121,50 @@ export default class AddArticle extends React.Component {
               onChange={this.handleEditorChange}
             />
 
+          <div className="form-group p-3">
+            <label className="col-md-4 control-label" htmlFor="tags">Tagi</label>
+            <div className="col-md-4">
+              <div className="input-group">
+                <input id="tagInput" name="tagInput" type="text" placeholder="np.: tag" className="form-control input-md" />
+                <span className="input-group-btn">
+                  <button onClick={this.handleTagButton} className="btn btn-secondary" type="button">Otaguj</button>
+                </span>
+              </div>
+          </div>
+          <div className="row">
+            <div className="col p-3" id="tagContainer">
+              {this.state.tags.map( tag =><div className="chip">
+              <span className="tagName">{tag}</span>
+              <span className="closebtn" onClick={this.removeTag}>&times;</span>
+              </div> )}
+            </div>
+          </div>
+
           <div className="form-group">
             <label className="col-md-4 control-label" htmlFor="submit"></label>
             <div className="col-md-4">
               <button onClick={event => {this.onSubmit;}} id="submit" name="submit" className="btn btn-success">Dodaj artykuł</button>
             </div>
           </div>
+          </div>
           </fieldset>
         </form>
       </div>
     )
   }
+
+  removeTag(e){
+    const name = e.target.parentElement.getElementsByClassName('tagName')[0].innerHTML
+    this.setState({
+    tags: this.state.tags.filter( val => val !== name)
+  });
+  }
+
+  handleTagButton(e){
+    const item = document.getElementById('tagInput').value
+    document.getElementById('tagInput').value = ""
+    this.setState({
+      tags: [...this.state.tags, item]
+    })
+  }
 }
-/*          <div className="form-group">
-            <label className="col-md-4 control-label" htmlFor="content">Treść</label>
-            <div className="col">
-              <textarea rows="15" wrap="hard" placeholder="Treść Twojego artykułu" className="form-control" id="content" name="content"></textarea>
-            </div>
-          </div>*/

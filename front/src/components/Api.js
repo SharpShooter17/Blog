@@ -148,8 +148,13 @@ const getArticleContent = function(id){
   return apiClient().get('/index.php?/API/ArticleController/getArticleContent/' + id)
 }
 
+const getTags = function(){
+  return apiClient().get('/index.php?/API/ArticleTagsController/getTags')
+}
+
 export default {getBlogCategories, getUserBlogs, getCategories,
                 addBlog, addCategory, addArticle,
                 getLastestArticles, getUserDetails, getBlogDetails,
                 getBlogArticles, getArticle, getUsers, getBlogs,
-                addComment, getComments, getArticleContent}
+                addComment, getComments, getArticleContent,
+                getTags}
