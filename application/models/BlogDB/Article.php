@@ -20,7 +20,7 @@ class Article extends CI_Model
     $this->title = $title;
     $this->content = htmlspecialchars($content, ENT_HTML5);
 
-    return $this->db->insert('article', $this) ? 1 : 0;
+    return $this->db->insert('article', $this) ? $this->db->insert_id('article.article_id') : 0;
   }
 
   public function getArticles($blog_id) {

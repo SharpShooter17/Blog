@@ -11,7 +11,14 @@ class ArticleTagsController extends CI_Controller {
   }
 
   public function getTags(){
+    header('Content-Type: text/html; charset=utf-8');
     echo json_encode( array('results' => $this->tag->getTags()) );
+  }
+
+  public function getArticleTags(){
+    $tags = $this->articletags->getArticleTags($id);
+    header('Content-Type: text/html; charset=utf-8');
+    echo json_encode($tags);
   }
 
   public function addTagsToArticle(){

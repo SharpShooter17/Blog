@@ -74,13 +74,14 @@ const addCategory = function (obj, blog_id, name){
       });
 }
 
-const addArticle = function (_blog_id, _category_id, _title, _content){
+const addArticle = function (_blog_id, _category_id, _title, _content, _tags){
   return axios.post(baseURL + '/index.php?/API/ArticleController/addArticle', querystring.stringify({
       token: Cookies.get('token'),
       blog_id: _blog_id,
       category_id: _category_id,
       title: _title,
-      content: _content
+      content: _content,
+      tags: JSON.stringify(_tags)
   }))
 
 }

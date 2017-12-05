@@ -9,6 +9,7 @@ class ArticleController extends CI_Controller {
     $this->load->model('token');
     $this->load->model('BlogDB/blog');
     $this->load->helper('date');
+    $this->load->model('BlogDB/articletags');
   }
 
   public function addArticle(){
@@ -26,6 +27,7 @@ class ArticleController extends CI_Controller {
     $category_id = $this->input->post('category_id');
     $title =  $this->input->post('title');
     $content =  $this->input->post('content');
+    $tags = json_decode($this->input->post('tags'));
 
     if (!$this->blog->userHasBlog($user, $blog_id)){
       header('Content-Type: application/json');
@@ -36,13 +38,18 @@ class ArticleController extends CI_Controller {
     $format = $this->article->getFormat();
     $time = mdate($format, time());
     $result = $this->article->addArticle($blog_id, $time, $category_id, $title, $content);
+    if ($result != 0){
+      $this->articletags->addTagsToArticle($result, $tags);
+      $result = 1;
+    }
     header('Content-Type: application/json');
     echo $this->statements->getJson($result);
   }
 
   public function getArticles($blog_id){
     header('Content-Type: application/json');
-    echo json_encode(array('results' => $this->article->getArticles($blog_id)));
+    $querry = $this->article->getArticles($blog_id);
+    echo json_encode(array('results' => $querry));
   }
 
   public function getContent($article_id){

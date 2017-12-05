@@ -52,8 +52,9 @@ export default class AddArticle extends React.Component {
     const category_id = e.target.category.value;
     const title = e.target.title.value;
     const content = this.state.content; //e.target.content.value;
+    const tags = this.state.tags;
 
-    Api.addArticle(blog_id, category_id, title, content)
+    Api.addArticle(blog_id, category_id, title, content, tags)
     .then( function(response) {
       if ( response.data.response == 'true' ){
         this.setState({
