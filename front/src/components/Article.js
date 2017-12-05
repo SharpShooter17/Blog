@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Api from './Api'
 import Cookies from 'js-cookie'
+import '../css/chip.css'
 
 export class Article extends React.Component {
   constructor(props){
@@ -10,6 +11,7 @@ export class Article extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clearForm = this.clearForm.bind(this);
     this.getArticleContent = this.getArticleContent.bind(this);
+    this.getArticleTags = this.getArticleTags.bind(this);
 
     this.state = {
       content: '',
@@ -20,7 +22,8 @@ export class Article extends React.Component {
       blog: '',
       msg: '',
       comments: [],
-      characters: 300
+      characters: 300,
+      tags: []
     }
   }
 
@@ -46,10 +49,20 @@ export class Article extends React.Component {
     }.bind(this))
   }
 
+  getArticleTags(){
+    Api.getArticleTags(this.props.match.params.article)
+    .then(function(response){
+      this.setState({
+        tags: response.data.results
+      })
+    }.bind(this))
+  }
+
   componentWillMount(){
     this.getArticle();
     this.getComments();
     this.getArticleContent();
+    this.getArticleTags();
   }
 
   getArticleContent() {
@@ -111,6 +124,13 @@ export class Article extends React.Component {
         </div>
         <div className="row">
           <div className="col" id="articleContent" dangerouslySetInnerHTML={{__html: this.state.content}} />
+        </div>
+        <div className="row">
+          <div className="col">
+            <h4 className="p-2">Tagi</h4>
+            <hr />
+            {this.state.tags.map(t => <div className="chip">{t.tag}</div> )}
+          </div>
         </div>
         <div className="row">
           <div className="col">

@@ -24,9 +24,6 @@ class Articletags extends CI_Model {
   private function addArticleTag($article_id, $tag_id){
     $sql = "INSERT INTO article_tags (tag_id, article_id) VALUES (".$this->db->escape($tag_id).", ".$this->db->escape($article_id).")";
     $this->db->query($sql);
-    /*$data = array('tag_id', $tag_id,
-                  'article_id' => $article_id);
-    $this->db->insert('article_tags', $data);*/
   }
 }
 

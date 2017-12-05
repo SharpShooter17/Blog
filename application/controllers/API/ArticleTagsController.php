@@ -15,10 +15,10 @@ class ArticleTagsController extends CI_Controller {
     echo json_encode( array('results' => $this->tag->getTags()) );
   }
 
-  public function getArticleTags(){
+  public function getArticleTags($id){
     $tags = $this->articletags->getArticleTags($id);
     header('Content-Type: text/html; charset=utf-8');
-    echo json_encode($tags);
+    echo json_encode( array('results' => $tags));
   }
 
   public function addTagsToArticle(){
