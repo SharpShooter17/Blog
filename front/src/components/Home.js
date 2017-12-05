@@ -6,12 +6,46 @@ export class Home extends Component {
   constructor(props){
     super(props);
     this.state = {
-      articles: []
+      articles: [],
+      //numOfArticles: 0,
+      pages: []
     }
+    this.handleOnClick = this.handleOnClick.bind(this);
+  }
+
+  getLastestArticles(page){
+    Api.getLastestArticles(this, 10, page, 2000);
+  }
+
+  pagination(page){
+    var startPage;
+    if (page <= 3){
+      startPage = 1;
+    } else {
+      startPage = page - 3;
+    }
+    var _pages = [];
+    for (var i = 0; i < 7; i++){
+      _pages[i] = i + startPage;
+    }
+    this.setState({
+      pages: _pages
+    })
   }
 
   componentWillMount(){
-    Api.getLastestArticles(this, 20, 1, 2000);
+    this.getLastestArticles(this.props.match.params.page)
+    /*Api.getCountOfArticles().then(function(response){
+      this.setState({
+        numOfArticles: response.data.results
+      })
+    }.bind(this))*/
+    this.pagination(this.props.match.params.page);
+  }
+
+  handleOnClick(e){
+    this.getLastestArticles(e.target.text);
+    this.pagination(e.target.text);
   }
 
   render() {
@@ -48,6 +82,14 @@ export class Home extends Component {
             </div>
           </div>
         )}
+
+        <nav aria-label="...">
+          <ul className="pagination pagination-lg justify-content-center">
+            {this.state.pages.map(page => (this.props.match.params.page == page) ? (
+              <li className="page-item active"><span className="page-link">{page}</span></li>)
+              : (<li className="page-item"><Link onClick={this.handleOnClick} to={'/Home/' + page} className="page-link">{page}</Link></li>) )}
+          </ul>
+        </nav>
       </div>
     );
   }

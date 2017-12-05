@@ -13,6 +13,10 @@ class Article extends CI_Model
     return '%Y-%m-%d %h:%i:%s';
   }
 
+  public function getCountOfArticles(){
+    return $this->db->count_all_results('article');
+  }
+
   public function addArticle($blog_id, $date, $category_id, $title, $content){
     $this->blog_id = $blog_id;
     $this->date = $date;
@@ -47,7 +51,8 @@ class Article extends CI_Model
     $this->db->join('blog', 'blog.blog_id = category.blog_id');
     $this->db->join('blog_category', 'blog.blog_category_id = blog_category.blog_category_id');
     $this->db->join('user', 'user.user_id = blog.user_id');
-    $this->db->order_by('article.date', 'ASC');
+    $this->db->order_by('article.date', 'DESC');
+    $this->db->limit($count, $count*$page);
     $querry = $this->db->get()->result();
     foreach ($querry as $article) {
       $article->content = htmlspecialchars_decode($article->content);
@@ -69,7 +74,6 @@ class Article extends CI_Model
   public function getArticleContent($id){
     $this->db->select('content');
     $this->db->where('article_id', $id);
-    //$querry[0]->content = htmlspecialchars_decode($querry[0]->content, ENT_HTML5);
     return htmlspecialchars_decode($this->db->get('article')->result()[0]->content, ENT_HTML5);
   }
 

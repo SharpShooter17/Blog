@@ -161,9 +161,14 @@ const searchArticlesByTag = function(tag){
   return apiClient().get('/index.php?/API/ArticleTagsController/searchArticlesByTag/' + tag)
 }
 
+const getCountOfArticles = function(){
+    return apiClient().get('/index.php?/API/ArticleController/getCountOfArticles')
+}
+
 export default {getBlogCategories, getUserBlogs, getCategories,
                 addBlog, addCategory, addArticle,
                 getLastestArticles, getUserDetails, getBlogDetails,
                 getBlogArticles, getArticle, getUsers, getBlogs,
                 addComment, getComments, getArticleContent,
-                getTags, getArticleTags, searchArticlesByTag}
+                getTags, getArticleTags, searchArticlesByTag,
+                getCountOfArticles}

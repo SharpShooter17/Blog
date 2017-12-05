@@ -45,3 +45,5 @@ export class Tag extends React.Component {
     </div>);
   }
 }
+
+export default Tag

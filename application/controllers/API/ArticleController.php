@@ -12,6 +12,11 @@ class ArticleController extends CI_Controller {
     $this->load->model('BlogDB/articletags');
   }
 
+  public function getCountOfArticles(){
+    header('Content-Type: application/json');
+    echo json_encode(array('results' => $this->article->getCountOfArticles() ));
+  }
+
   public function addArticle(){
     $user = $_POST['token'];
     $user = $this->token->tokenIsValid($user);
@@ -57,9 +62,9 @@ class ArticleController extends CI_Controller {
     echo json_encode($this->article->getContent($article_id));
   }
 
-  public function getLastArticles($count = 20, $page = 1, $wordsLimit = null){
+  public function getLastArticles($count = 20, $page = 0, $wordsLimit = null){
       header('Content-Type: application/json');
-      $result = $this->article->getLastArticles($count, $page);
+      $result = $this->article->getLastArticles($count, $page - 1);
       //var_dump($result);die();
       if ($wordsLimit != null && is_numeric($wordsLimit)){
         for ( $i = 0; $i < count($result); $i++ ){
