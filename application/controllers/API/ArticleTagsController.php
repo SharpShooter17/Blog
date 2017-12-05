@@ -25,5 +25,10 @@ class ArticleTagsController extends CI_Controller {
     $token = $this->input->post('token');
     $article = $this->input->post('article');
   }
+
+  public function searchArticlesByTag($tag){
+    header('Content-Type: text/html; charset=utf-8');
+    echo json_encode( array('results' => $this->articletags->searchArticlesByTag($tag)));
+  }
 }
 ?>

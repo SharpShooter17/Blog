@@ -129,7 +129,7 @@ export class Article extends React.Component {
           <div className="col">
             <h4 className="p-2">Tagi</h4>
             <hr />
-            {this.state.tags.map(t => <div className="chip">{t.tag}</div> )}
+            {this.state.tags.map(t => <div className="chip"><Link to={'/Tag/' + t.tag}>{t.tag}</Link></div> )}
           </div>
         </div>
         <div className="row">

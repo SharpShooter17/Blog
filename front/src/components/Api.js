@@ -157,9 +157,13 @@ const getArticleTags = function(article){
   return apiClient().get('/index.php?/API/ArticleTagsController/getArticleTags/' + article)
 }
 
+const searchArticlesByTag = function(tag){
+  return apiClient().get('/index.php?/API/ArticleTagsController/searchArticlesByTag/' + tag)
+}
+
 export default {getBlogCategories, getUserBlogs, getCategories,
                 addBlog, addCategory, addArticle,
                 getLastestArticles, getUserDetails, getBlogDetails,
                 getBlogArticles, getArticle, getUsers, getBlogs,
                 addComment, getComments, getArticleContent,
-                getTags, getArticleTags}
+                getTags, getArticleTags, searchArticlesByTag}

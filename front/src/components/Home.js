@@ -22,7 +22,7 @@ export class Home extends Component {
         <h3 className="p-3">Ostatnie artykuły</h3>
         {this.state.articles.map(
           article =>
-          <div className="row">
+          <div className="row m-4">
             <div className="col-12">
               <div className="row">
                 <div className="col-12 bg-dark">
