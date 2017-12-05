@@ -15,8 +15,12 @@ export class Blog extends React.Component {
       blog_id: '',
       articles: [],
       blog_category_id: '',
-      blog_category: ''
+      blog_category: '',
+      categories: [],
+      actual_category: 0
     }
+
+    this.handleOnChange = this.handleOnChange.bind(this);
   }
 
   componentWillMount(){
@@ -33,11 +37,18 @@ export class Blog extends React.Component {
         blog_category: response.data.results.blogCategory
       })
       Api.getBlogArticles(this, response.data.results.blog_id);
+      Api.getCategories(this, response.data.results.blog_id);
     }}.bind(this))
   }
 
   componentDidMount() {
     //setInterval(this.inc, 1000);
+  }
+
+  handleOnChange(e){
+    this.setState({
+      actual_category: e.target.value
+    })
   }
 
   render(){
@@ -56,6 +67,24 @@ export class Blog extends React.Component {
         </div>
         <div className="row">
           <div className="col">
+            <form className="form-horizontal">
+              <fieldset>
+              <legend>Wybierz kategorię</legend>
+              <div className="form-group">
+              <label className="col-md-4 control-label" htmlFor="category"></label>
+              <div className="col-md-4">
+                <select onChange={this.handleOnChange} id="category" name="category" className="form-control">
+                  <option value="0">Wszystkie kategorie</option>
+                  {this.state.categories.map(category => <option value={category.category_id}>{category.name}</option>) }
+                </select>
+              </div>
+              </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
             <h3 className="p-3">Artykuły</h3>
             <table className="table table-striped">
               <thead>
@@ -66,12 +95,13 @@ export class Blog extends React.Component {
                 </tr>
               </thead>
               <tbody>
-              {this.state.articles.map( article => <tr>
-                  <td><Link to={'/User/'+this.props.match.params.user+'/'+this.props.match.params.blog+'/'+article.article_id}>{article.title}</Link></td>
-                  <td>{article.date}</td>
-                  <td>{article.category}</td>
-                </tr>
-              )}
+              {this.state.articles.map( article => ( article.category_id == this.state.actual_category || this.state.actual_category == 0 ) ?
+                                          <tr>
+                                            <td><Link to={'/User/'+this.props.match.params.user+'/'+this.props.match.params.blog+'/'+article.article_id}>{article.title}</Link></td>
+                                            <td>{article.date}</td>
+                                            <td>{article.category}</td>
+                                          </tr> : ''
+                                      )}
               </tbody>
             </table>
           </div>
