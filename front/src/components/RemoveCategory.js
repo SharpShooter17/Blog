@@ -8,9 +8,11 @@ export class RemoveCategory extends React.Component {
     super(props);
     this.state = {
       blogs: [],
-      categories: []
+      categories: [],
+      msg: ''
     }
     this.updateCategory = this.updateCategory.bind(this);
+    this.removeCategory = this.removeCategory.bind(this);
   }
   componentWillMount(){
     Api.getUserBlogs(Cookies.get('id')).then(function(response){
@@ -22,6 +24,14 @@ export class RemoveCategory extends React.Component {
   updateCategory(e){
     Api.getCategories(this, e.target.value)
   }
+  removeCategory(e){
+    e.preventDefault()
+    Api.removeCategory(e.target.category.value).then(function(response){
+      this.setState({
+        msg: response.data.response
+      })
+    }.bind(this))
+  }
   render(){
     return (
       <div>
@@ -30,7 +40,7 @@ export class RemoveCategory extends React.Component {
           Poniższa operacja trwale <b>usunie</b> Twoją <b>kategorię</b> oraz <b>wszystkie artykuły</b> z tej kategorii!
           Tej operacji nie da się odwrócić!
         </p>
-        <form className="form-horizontal">
+        <form onSubmit={this.removeCategory} className="form-horizontal">
           <fieldset>
 
           <legend>Usuń kategorię</legend>
@@ -58,12 +68,14 @@ export class RemoveCategory extends React.Component {
           <div className="form-group">
             <label className="col-md-4 control-label" for="submit">Wciśnij aby usunąć kategorię</label>
             <div className="col-md-4">
-              <button id="submit" name="submit" className="btn btn-danger">Usuń kategorię</button>
+              <button onClick={event => {this.onSubmit;}} id="submit" name="submit" className="btn btn-danger">Usuń kategorię</button>
             </div>
           </div>
 
           </fieldset>
         </form>
+        { (this.state.msg == 'true') ? <span className="text-success">Kategoria została usunięta</span> : (this.state.msg != '') ?
+                                        <span className="text-danger">Kategoria nie może być usunięta - {this.state.msg}</span> : ''}
       </div>
     )
   }

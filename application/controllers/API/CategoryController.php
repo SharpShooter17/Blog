@@ -19,7 +19,7 @@ class CategoryController extends CI_Controller {
   public function addCategory() {
     $user = $this->input->post('token');
     $user = $this->token->tokenIsValid($user);
-    
+
     if (is_numeric($user)){
       if ($user == -1){
         echo $this->statements->getJson(-1);
@@ -38,6 +38,18 @@ class CategoryController extends CI_Controller {
     $result = $this->category->addCategory($blog_id, $name);
     header('Content-Type: application/json');
     echo $this->statements->getJson($result);
+  }
+
+  public function removeCategory($category_id){
+      $token = $this->input->post('token');
+      $user = $this->token->tokenIsValid($token);
+      header('Content-Type: application/json');
+      if ( $user == -1 ){
+        echo $this->statements->getJson($user);
+        return;
+      }
+      $res = $this->category->removeCategory($user, $category_id);
+      echo $this->statements->getJson($res);
   }
 }
 ?>

@@ -86,7 +86,7 @@ export class RemoveArticle extends React.Component {
           <div className="form-group">
           <label className="col-md-4 control-label" for="submit">Wciśnij aby usunąć artykuł</label>
           <div className="col-md-4">
-            <button id="submit" name="submit" className="btn btn-danger">Usuń artykuł</button>
+            <button onClick={event => {this.onSubmit;}} id="submit" name="submit" className="btn btn-danger">Usuń artykuł</button>
           </div>
           </div>
 
