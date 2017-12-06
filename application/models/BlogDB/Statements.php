@@ -14,7 +14,7 @@ class Statements extends CI_Model {
     7 => 'Unauthorized action',
     8 => 'Category exists',
     9 => 'Too many characters',
-    10 => 'Comment is too short'
+    10 => 'Comment is too short',
   );
 
   public function getJson($index) {

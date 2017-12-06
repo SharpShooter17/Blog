@@ -165,10 +165,20 @@ const getCountOfArticles = function(){
     return apiClient().get('/index.php?/API/ArticleController/getCountOfArticles')
 }
 
+const removeArticle = function(article){
+  return axios.post(baseURL + '/index.php?/API/ArticleController/removeArticle/' + article, querystring.stringify({
+    token: Cookies.get('token')
+  }))
+}
+
+const getArticlesByCategoryId = function(id) {
+  return apiClient().get('/index.php/API/ArticleController/getArticlesByCategoryId/' + id)
+}
+
 export default {getBlogCategories, getUserBlogs, getCategories,
                 addBlog, addCategory, addArticle,
                 getLastestArticles, getUserDetails, getBlogDetails,
                 getBlogArticles, getArticle, getUsers, getBlogs,
                 addComment, getComments, getArticleContent,
                 getTags, getArticleTags, searchArticlesByTag,
-                getCountOfArticles}
+                getCountOfArticles, removeArticle, getArticlesByCategoryId}

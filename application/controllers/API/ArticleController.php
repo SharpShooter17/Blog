@@ -92,6 +92,23 @@ class ArticleController extends CI_Controller {
     header('Content-Type: text/html; charset=utf-8');
     echo $this->article->getArticleContent($id);
   }
+
+  public function removeArticle($id){
+    $token = $this->input->post('token');
+    $user = $this->token->tokenIsValid($token);
+    header('Content-Type: application/json');
+    if ($user == -1){
+      echo $this->statements->getJson($user);
+      return;
+    }
+    $result = $this->article->removeArticle($id, $user);
+    echo $this->statements->getJSon($result);
+  }
+
+  public function getArticlesByCategoryId($category_id){
+    header('Content-Type: application/json');
+    echo json_encode(array( 'results' => $this->article->getArticlesByCategoryId($category_id)));
+  }
 }
 
 ?>

@@ -37,6 +37,14 @@ class Article extends CI_Model
     return $querry;
   }
 
+  public function getArticlesByCategoryId($category_id){
+    return $this->db->select('article.date, article.title, article.article_id')->
+                      from('article')->
+                      where('article.category_id', $category_id)->
+                      get()->
+                      result();
+  }
+
   public function getContent($article_id){
     $this->db->select('content');
     $this->db->from('article');
@@ -75,6 +83,31 @@ class Article extends CI_Model
     $this->db->select('content');
     $this->db->where('article_id', $id);
     return htmlspecialchars_decode($this->db->get('article')->result()[0]->content, ENT_HTML5);
+  }
+
+  public function removeArticle($article_id, $user_id){
+    $hasArticle = $this->userHasArticle($user_id, $article_id);
+    if ($hasArticle == true){
+      return $this->db->where('article.article_id', $article_id)->
+                        delete('article') ? 1 : 0;
+    } else {
+      return 7;
+    }
+  }
+
+  private function userHasArticle($user_id, $article_id){
+    $query = $this->db->select('count(article.article_id) as articles')->
+      from('article')->
+      join('blog', 'article.blog_id = blog.blog_id')->
+      join('user', 'blog.user_id = user.user_id')->
+      where('article.article_id', $article_id)->
+      where('user.user_id', $user_id)->
+      get()->result();
+    if ($query[0]->articles == 1){
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }
