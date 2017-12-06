@@ -88,6 +88,8 @@ class Article extends CI_Model
   public function removeArticle($article_id, $user_id){
     $hasArticle = $this->userHasArticle($user_id, $article_id);
     if ($hasArticle == true){
+      $this->db->where('comments.article_id', $article_id)->delete('comments');
+      $this->db->where('article_tags.article_id', $article_id)->delete('article_tags');
       return $this->db->where('article.article_id', $article_id)->
                         delete('article') ? 1 : 0;
     } else {
