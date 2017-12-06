@@ -7,14 +7,13 @@ export class Home extends Component {
     super(props);
     this.state = {
       articles: [],
-      //numOfArticles: 0,
       pages: []
     }
     this.handleOnClick = this.handleOnClick.bind(this);
   }
 
   getLastestArticles(page){
-    Api.getLastestArticles(this, 10, page, 2000);
+    Api.getLastestArticles(this, 10, page, 500);
   }
 
   pagination(page){
@@ -72,11 +71,8 @@ export class Home extends Component {
                   <span>Autor: <strong><Link to={'/User/' + article.nick}>{article.nick}</Link></strong></span><br />
                   <span>Data dodania: <strong>{article.date}</strong></span><br />
                 </div>
-                <div className="col lead bg-light">
-                  <article className="p-3">
-                    <div dangerouslySetInnerHTML={{__html: article.content}} />
-                  </article>
-                </div>
+                <div className="col-9 lead bg-light" dangerouslySetInnerHTML={{__html: article.content}} />
+
               </div>
             </div>
           </div>

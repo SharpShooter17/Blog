@@ -63,7 +63,7 @@ class Article extends CI_Model
     $this->db->limit($count, $count*$page);
     $querry = $this->db->get()->result();
     foreach ($querry as $article) {
-      $article->content = htmlspecialchars_decode($article->content);
+      $article->content = preg_replace('/(<[^>]+) style=".*?"/i', '$1', htmlspecialchars_decode($article->content));
     }
     return $querry;
   }
