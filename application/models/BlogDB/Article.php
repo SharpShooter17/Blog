@@ -85,16 +85,19 @@ class Article extends CI_Model
     return htmlspecialchars_decode($this->db->get('article')->result()[0]->content, ENT_HTML5);
   }
 
-  public function removeArticle($article_id, $user_id){
+  public function checkIfUserHasArticleAndRemove($user_id, $article_id){
     $hasArticle = $this->userHasArticle($user_id, $article_id);
     if ($hasArticle == true){
-      $this->db->where('comments.article_id', $article_id)->delete('comments');
-      $this->db->where('article_tags.article_id', $article_id)->delete('article_tags');
-      return $this->db->where('article.article_id', $article_id)->
-                        delete('article') ? 1 : 0;
+      return $this->removeArticle($article_id);
     } else {
       return 7;
     }
+  }
+
+  public function removeArticle($article_id){
+    $this->db->where('comments.article_id', $article_id)->delete('comments');
+    $this->db->where('article_tags.article_id', $article_id)->delete('article_tags');
+    return $this->db->where('article.article_id', $article_id)->delete('article') ? 1 : 0;
   }
 
   private function userHasArticle($user_id, $article_id){

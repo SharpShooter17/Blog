@@ -180,6 +180,11 @@ const removeCategory = function(id) {
     token: Cookies.get('token')
   }))
 }
+const removeBlog = function(id) {
+  return axios.post(baseURL + '/index.php/API/BlogController/removeBlog/' + id, querystring.stringify({
+    token: Cookies.get('token')
+  }))
+}
 export default {getBlogCategories, getUserBlogs, getCategories,
                 addBlog, addCategory, addArticle,
                 getLastestArticles, getUserDetails, getBlogDetails,
@@ -187,4 +192,4 @@ export default {getBlogCategories, getUserBlogs, getCategories,
                 addComment, getComments, getArticleContent,
                 getTags, getArticleTags, searchArticlesByTag,
                 getCountOfArticles, removeArticle, getArticlesByCategoryId,
-                removeCategory}
+                removeCategory, removeBlog}

@@ -74,7 +74,17 @@ class BlogController extends CI_Controller {
     header('Content-Type: application/json');
     echo json_encode(array('results' => $this->blog->getBlogs($category)));
   }
-
+  public function removeBlog($blog_id){
+    $token = $this->input->post('token');
+    $user = $this->token->tokenIsValid($token);
+    header('Content-Type: application/json');
+    if ( $user == -1 ){
+      echo $this->statements->getJson($user);
+      return;
+    }
+    $res = $this->blog->checkIfUserHasBlogAndRemove($user, $blog_id);
+    echo $this->statements->getJson($res);
+  }
 }
 
 ?>

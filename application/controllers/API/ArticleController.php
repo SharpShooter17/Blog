@@ -101,7 +101,7 @@ class ArticleController extends CI_Controller {
       echo $this->statements->getJson($user);
       return;
     }
-    $result = $this->article->removeArticle($id, $user);
+    $result = $this->article->checkIfUserHasArticleAndRemove($user, $id);
     echo $this->statements->getJSon($result);
   }
 

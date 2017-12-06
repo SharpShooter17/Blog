@@ -48,7 +48,7 @@ class CategoryController extends CI_Controller {
         echo $this->statements->getJson($user);
         return;
       }
-      $res = $this->category->removeCategory($user, $category_id);
+      $res = $this->category->checkIfUserHasCategoryAndRemove($user, $category_id);
       echo $this->statements->getJson($res);
   }
 }

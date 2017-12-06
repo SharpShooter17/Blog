@@ -7,8 +7,10 @@ export class RemoveBlog extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      blogs: []
+      blogs: [],
+      msg: ''
     }
+    this.removeBlog = this.removeBlog.bind(this);
   }
   componentWillMount(){
     Api.getUserBlogs(Cookies.get('id')).then(function(response){
@@ -17,6 +19,14 @@ export class RemoveBlog extends React.Component {
       })
     }.bind(this));
   }
+  removeBlog(e){
+    e.preventDefault()
+    Api.removeBlog(e.target.blog.value).then(function(response){
+      this.setState({
+        msg: response.data.response
+      })
+    }.bind(this))
+  }
   render(){
     return (
       <div>
@@ -24,7 +34,7 @@ export class RemoveBlog extends React.Component {
         <p>
           Poniższa operacja trwale <b>usunie</b> Twój <b>blog</b>! Tej operacji nie da się odwrócić!
         </p>
-        <form className="form-horizontal">
+        <form onSubmit={this.removeBlog} className="form-horizontal">
           <fieldset>
 
           <legend>Usuń blog</legend>
@@ -48,6 +58,8 @@ export class RemoveBlog extends React.Component {
 
           </fieldset>
         </form>
+        { (this.state.msg == 'true') ? <span className="text-success">Blog został usunięty</span> : (this.state.msg != '') ?
+                                        <span className="text-danger">Blog nie może być usunięty - {this.state.msg}</span> : ''}
       </div>
     )
   }

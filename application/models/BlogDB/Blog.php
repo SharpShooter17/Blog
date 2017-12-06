@@ -90,6 +90,27 @@ class Blog extends CI_Model {
     $querry = $this->db->get()->result();
     return $querry;
   }
+
+  public function checkIfUserHasBlogAndRemove($user_id, $blog_id){
+    $hasBlog = $this->userHasBlog($user_id, $blog_id);
+    if ($hasBlog == true){
+      return $this->removeBlog($blog_id);
+    } else {
+      return 7;
+    }
+  }
+
+  public function removeBlog($blog_id){
+    $this->removeCategoriesByBlogId($blog_id);
+    return $this->db->where('blog.blog_id', $blog_id)->delete('blog') ? 1 : 0;
+  }
+  private function removeCategoriesByBlogId($blog_id){
+    $this->load->model('BlogDB/category');
+    $query = $this->db->select('category.category_id')->from('category')->where('category.blog_id', $blog_id)->get()->result();
+    foreach ($query as $row) {
+      $this->category->removeCategory($row->category_id);
+    }
+  }
 }
 
 ?>

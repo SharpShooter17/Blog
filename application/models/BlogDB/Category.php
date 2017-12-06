@@ -36,22 +36,26 @@ class Category extends CI_Model {
     return false;
   }
 
-  public function removeCategory($user_id, $category_id){
+  public function checkIfUserHasCategoryAndRemove($user_id, $category_id){
     $res = $this->userHasCategory($user_id, $category_id);
     if ($res == true){
-      $this->removeArticlesByCategoryId($category_id);
-      return $this->db->where('category.category_id', $category_id)->delete('category') ? 1 : 0;
+      return $this->removeCategory($category_id);
     } else {
       return 7;
     }
   }
 
+  public function removeCategory($category_id){
+    $this->removeArticlesByCategoryId($category_id);
+    return $this->db->where('category.category_id', $category_id)->delete('category') ? 1 : 0;
+  }
+
   private function removeArticlesByCategoryId($category_id){
+    $this->load->model('BlogDB/article');
     $query = $this->db->select('article.article_id')->from('article')->where('article.category_id', $category_id)->get()->result();
+
     foreach ($query as $row) {
-      $this->db->where('comments.article_id', $row->article_id)->delete('comments');
-      $this->db->where('article_tags.article_id', $row->article_id)->delete('article_tags');
-      $this->db->where('article.article_id', $row->article_id)->delete('article');
+      $this->article->removeArticle($row->article_id);
     }
   }
 
