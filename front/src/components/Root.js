@@ -29,8 +29,7 @@ export class Root extends Component {
           <main>
             <Switch>
               <Route exact path={'/'} component={ Home } />
-              <Route exact path={'/Home'} component={ Home } />
-              <Route exact path={'/Home/:page'} component={ Home } />
+              <Route path={'/Home/:page'} component={ Home } />
               <Route exact path={'/Login'} component={ Login } />
               <Route exact path={'/Register'} component={ Register } />
               <Route path={'/ControllPanel'} component={ ControllPanel } />

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Api from './Api';
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 
 export class Home extends Component {
   constructor(props){
@@ -34,13 +34,12 @@ export class Home extends Component {
   }
 
   componentWillMount(){
-    this.getLastestArticles(this.props.match.params.page)
-    /*Api.getCountOfArticles().then(function(response){
-      this.setState({
-        numOfArticles: response.data.results
-      })
-    }.bind(this))*/
-    this.pagination(this.props.match.params.page);
+    var page = this.props.match.params.page;
+    if ( page == undefined ){
+      page = 1;
+    }
+    this.getLastestArticles(page)
+    this.pagination(page);
   }
 
   handleOnClick(e){
