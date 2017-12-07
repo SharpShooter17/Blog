@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import Api from './Api'
 import Cookies from 'js-cookie'
 import '../css/chip.css'
@@ -13,7 +13,8 @@ export class Article extends React.Component {
     this.getArticleContent = this.getArticleContent.bind(this);
     this.getArticleTags = this.getArticleTags.bind(this);
     this.removeComment = this.removeComment.bind(this);
-
+    this.removeArticle = this.removeArticle.bind(this);
+    
     this.state = {
       content: '',
       article_id: '',
@@ -25,7 +26,8 @@ export class Article extends React.Component {
       msg: '',
       comments: [],
       characters: 300,
-      tags: []
+      tags: [],
+      removed: 'false'
     }
   }
 
@@ -115,11 +117,18 @@ export class Article extends React.Component {
     e.preventDefault()
     var msg = 'false';
     Api.removeArticle(e.target.id).then(function(response){
-      msg = response.data.response;
+      this.setState({
+        removed: response.data.response
+      })
     }.bind(this))
   }
 
   render(){
+    if (this.state.removed == 'true'){
+      return (
+        <Redirect to={'/User/' + this.state.author + '/' + this.state.blog} />
+      )
+    }
     return (
       <div>
         <div className="row">
