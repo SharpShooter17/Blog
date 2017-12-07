@@ -79,7 +79,7 @@ export class Home extends Component {
         )}
 
         <nav aria-label="...">
-          <ul className="pagination pagination-lg justify-content-center">
+          <ul className="pagination pagination-m justify-content-center">
             {this.state.pages.map(page => (this.props.match.params.page == page) ? (
               <li key={page.toString()} className="page-item active"><span className="page-link">{page}</span></li>)
               : (<li key={page.toString()} className="page-item"><Link onClick={this.handleOnClick} to={'/Home/' + page} className="page-link">{page}</Link></li>) )}
