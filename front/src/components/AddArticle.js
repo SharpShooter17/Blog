@@ -41,7 +41,6 @@ export default class AddArticle extends React.Component {
   }
 
   clearForm(){
-    document.getElementById('content').value = ""
     document.getElementById('title').value = ""
   }
 
@@ -180,7 +179,7 @@ export default class AddArticle extends React.Component {
           </div>
           <div className="row">
             <div className="col p-3" id="tagContainer">
-              {this.state.tags.map( tag =><div className="chip">
+              {this.state.tags.map( tag =><div key={tag} className="chip">
               <span className="tagName">{tag}</span>
               <span className="closebtn" onClick={this.removeTag}>&times;</span>
               </div> )}

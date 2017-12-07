@@ -10,6 +10,7 @@ class ArticleController extends CI_Controller {
     $this->load->model('BlogDB/blog');
     $this->load->helper('date');
     $this->load->model('BlogDB/articletags');
+    $this->load->model('BlogDB/user');
   }
 
   public function getCountOfArticles(){
@@ -109,11 +110,15 @@ class ArticleController extends CI_Controller {
     $token = $this->input->post('token');
     $user = $this->token->tokenIsValid($token);
     header('Content-Type: application/json');
+    $result = 0;
+    $userRole = $this->user->getUserRole($user);
     if ($user == -1){
-      echo $this->statements->getJson($user);
-      return;
+      $result = -1;
+    } else if ($userRole == 2 || $userRole == 3){
+      $result = $this->article->removeArticle($id);
+    } else {
+      $result = $this->article->checkIfUserHasArticleAndRemove($user, $id);
     }
-    $result = $this->article->checkIfUserHasArticleAndRemove($user, $id);
     echo $this->statements->getJSon($result);
   }
 

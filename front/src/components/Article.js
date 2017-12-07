@@ -16,6 +16,7 @@ export class Article extends React.Component {
 
     this.state = {
       content: '',
+      article_id: '',
       date: '',
       title: '',
       author: '',
@@ -45,7 +46,8 @@ export class Article extends React.Component {
         title: response.data.article.title,
         author: response.data.article.nick,
         blog: response.data.article.blog,
-        category: response.data.article.category
+        category: response.data.article.category,
+        article_id: response.data.article.article_id
       })
     }.bind(this))
   }
@@ -109,12 +111,22 @@ export class Article extends React.Component {
     document.getElementById('comment').value = "";
   }
 
+  removeArticle(e){
+    e.preventDefault()
+    var msg = 'false';
+    Api.removeArticle(e.target.id).then(function(response){
+      msg = response.data.response;
+    }.bind(this))
+  }
+
   render(){
     return (
       <div>
         <div className="row">
           <div className="col">
-            <h1 className="p-3">{this.state.title}</h1>
+            <h1 className="p-3">{this.state.title}
+            {Cookies.get('role') == 2 || Cookies.get('role') == 3 ?
+            <button id={this.state.article_id} onClick={this.removeArticle} className="deleteButton">usuń&times;</button> : ''}</h1>
             <hr />
           </div>
           <div className="pull-right text-right">
