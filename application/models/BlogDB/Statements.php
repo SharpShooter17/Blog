@@ -15,6 +15,11 @@ class Statements extends CI_Model {
     8 => 'Category exists',
     9 => 'Too many characters',
     10 => 'Comment is too short',
+    11 => 'Data is not valid',
+    12 => 'Select blog',
+    13 => 'Select category',
+    14 => 'Minimum length of title is 3 characters',
+    15 => 'Minimum lenght of content is 100 characters'
   );
 
   public function getJson($index) {

@@ -34,9 +34,21 @@ class ArticleController extends CI_Controller {
     $content =  $this->input->post('content');
     $tags = json_decode($this->input->post('tags'));
 
-    if (!$this->blog->userHasBlog($user, $blog_id)){
-      header('Content-Type: application/json');
-      echo $this->statements->getJson(7);
+    $error = 0;
+    if (!ctype_digit($blog_id)){
+      $error = 12;
+    } else if ( !ctype_digit($category_id) &&  intval($category_id) > 0){
+      $error = 13;
+    } else if (strlen($title) < 4){
+      $error = 14;
+    } else if (strlen($content) < 101){
+      $error = 15;
+    } else if (!$this->blog->userHasBlog($user, $blog_id)){
+      $error = 7;
+    }
+    header('Content-Type: application/json');
+    if ($error != 0){
+      echo $this->statements->getJson($error);
       return;
     }
 
@@ -47,7 +59,7 @@ class ArticleController extends CI_Controller {
       $this->articletags->addTagsToArticle($result, $tags);
       $result = 1;
     }
-    header('Content-Type: application/json');
+
     echo $this->statements->getJson($result);
   }
 
