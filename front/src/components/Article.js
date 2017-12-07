@@ -14,7 +14,7 @@ export class Article extends React.Component {
     this.getArticleTags = this.getArticleTags.bind(this);
     this.removeComment = this.removeComment.bind(this);
     this.removeArticle = this.removeArticle.bind(this);
-    
+
     this.state = {
       content: '',
       article_id: '',
@@ -77,7 +77,6 @@ export class Article extends React.Component {
         content: response.data
       })
     }.bind(this))
-    console.log(Cookies.get('role'));
   }
 
   componentDidMount(){
