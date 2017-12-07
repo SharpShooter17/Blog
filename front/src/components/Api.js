@@ -185,6 +185,16 @@ const removeBlog = function(id) {
     token: Cookies.get('token')
   }))
 }
+const getRoles = function(){
+  return apiClient().get('/index.php/API/RoleController/getRoles/')
+}
+
+const changeUserRole = function(user, role) {
+  return axios.post(baseURL + '/index.php/API/userController/changeUserRole/' + user + '/'+ role, querystring.stringify({
+    token: Cookies.get('token')
+  }))
+}
+
 export default {getBlogCategories, getUserBlogs, getCategories,
                 addBlog, addCategory, addArticle,
                 getLastestArticles, getUserDetails, getBlogDetails,
@@ -192,4 +202,5 @@ export default {getBlogCategories, getUserBlogs, getCategories,
                 addComment, getComments, getArticleContent,
                 getTags, getArticleTags, searchArticlesByTag,
                 getCountOfArticles, removeArticle, getArticlesByCategoryId,
-                removeCategory, removeBlog}
+                removeCategory, removeBlog, getRoles,
+                changeUserRole}

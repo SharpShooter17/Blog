@@ -6,8 +6,13 @@ class Role extends CI_Model {
   public $name;
 
   public function get($id){
+    $id = intval($id);
     $querry = $this->db->get('role')->result()[$id - 1];
     return $querry;
+  }
+
+  public function getRoles(){
+    return $this->db->get('role')->result();
   }
 
   public function insert($id, $name){

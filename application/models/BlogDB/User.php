@@ -83,10 +83,10 @@ class User extends CI_Model {
   }
 
   public function getUserRole($user_id){
-    $this->db->select('role');
+    $this->db->select('role_id as role');
     $this->db->from('user');
     $this->db->where('user_id', $user_id);
-    $querry = $this->db->get()->result()[0];
+    $querry = $this->db->get()->result()[0]->role;
     return $querry;
   }
 

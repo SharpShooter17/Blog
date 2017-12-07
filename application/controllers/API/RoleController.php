@@ -17,6 +17,11 @@ class RoleController extends CI_Controller {
     header('Content-Type: application/json');
     echo json_encode(array( 'role' => $this->role->get($id)));
   }
+
+  public function getRoles(){
+    header('Content-Type: application/json');
+    echo json_encode(array( 'results' => $this->role->getRoles()));
+  }
 }
 
 ?>

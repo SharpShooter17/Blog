@@ -8,6 +8,7 @@ class UserController extends CI_Controller {
     $this->load->model("BlogDB/user");
     $this->load->model('BlogDB/statements');
     $this->load->model('token');
+    $this->load->model('BlogDB/role');
   }
 
   public function addUser() {
@@ -40,6 +41,7 @@ class UserController extends CI_Controller {
       $result['token'] = $token;
     }
     $result['id'] = $id;
+    $result ['role'] = $this->user->getUserRole($id);
     echo json_encode($result);
   }
 
@@ -78,6 +80,23 @@ class UserController extends CI_Controller {
     }
     echo json_encode( array('results' => $result ));
     return;
+  }
+
+  public function changeUserRole($user_id, $role_id){
+    $token = $this->input->post('token');
+    $user = intval($this->token->tokenIsValid($token));
+    //var_dump($this->role->get($user));die();
+    $result = 0;
+    if ($user == -1){
+      $result = -1;
+    } else if ( intval($this->user->getUserRole($user) != 3 )){
+      $result = 7;
+      echo $this->user->getUserRole($user);
+    } else {
+      $result = $this->user->updateRole($user_id, $role_id);
+    }
+    header('Content-Type: application/json');
+    echo $this->statements->getJson($result);
   }
 }
 

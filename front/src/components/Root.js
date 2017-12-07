@@ -12,6 +12,7 @@ import { Article } from './Article'
 import { Users } from './Users'
 import { Blogs } from './Blogs'
 import { Tag } from './Tag'
+import { Administrator } from './Administrator'
 
 import '../css/bootstrap.css'
 
@@ -39,6 +40,7 @@ export class Root extends Component {
               <Route exact path={'/Users'} component={Users} />
               <Route exact path={'/Blogs'} component={Blogs} />
               <Route exact path={'/Tag/:tag'} component={Tag} />
+              <Route path={'/Administrator'} component={Administrator} />
             </Switch>
           </main>
         </div>

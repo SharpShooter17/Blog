@@ -13,6 +13,7 @@ handleLogOut(){
   Cookies.remove('token');
   Cookies.remove('logged');
   Cookies.remove('id');
+  Cookies.remove('role');
 }
 
 render() {
@@ -32,6 +33,8 @@ render() {
               <li className="nav-item"><Link className="nav-link" to="/Login">Logowanie</Link></li>: ''}
               {(Cookies.get('logged') == 'true') ?
               <li className="nav-item"><Link className="nav-link" to="/ControllPanel">Panel sterowania</Link></li> : ''}
+              {(Cookies.get('logged') == 'true' && Cookies.get('role') == 3) ?
+              <li className="nav-item"><Link className="nav-link text-danger" to="/Administrator">Administrator</Link></li> : ''}
               {(Cookies.get('logged') == 'true') ?
               <li className="nav-item"><a onClick={this.handleLogOut} className="nav-link" href="">Wyloguj</a></li> : ''}
               </div>
