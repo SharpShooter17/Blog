@@ -33,7 +33,6 @@ export class ChangeUserRole extends React.Component {
       <div className="row">
         <div className="col">
           <h3 className="p-3">Zmiana praw użytkownika</h3>
-          <hr />
           <table className="table table-striped">
             <thead>
               <tr>
