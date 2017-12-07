@@ -31,7 +31,7 @@ export class Tag extends React.Component {
           </tr>
         </thead>
         <tbody>
-        {this.state.articles.map( article => <tr>
+        {this.state.articles.map( article => <tr key={article.article_id.toString()}>
                                       <td><Link to={'/User/'+ article.nick +'/'+article.blog+'/'+article.article_id}>{article.title}</Link></td>
                                       <td>{article.date}</td>
                                       <td>{article.category}</td>
