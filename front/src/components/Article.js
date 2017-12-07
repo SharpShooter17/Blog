@@ -12,6 +12,7 @@ export class Article extends React.Component {
     this.clearForm = this.clearForm.bind(this);
     this.getArticleContent = this.getArticleContent.bind(this);
     this.getArticleTags = this.getArticleTags.bind(this);
+    this.removeComment = this.removeComment.bind(this);
 
     this.state = {
       content: '',
@@ -72,6 +73,7 @@ export class Article extends React.Component {
         content: response.data
       })
     }.bind(this))
+    console.log(Cookies.get('role'));
   }
 
   componentDidMount(){
@@ -165,6 +167,7 @@ export class Article extends React.Component {
                   <div className="col p-3">
                     <span><Link className="text-warning" to={'/User/' + comment.nick}>{comment.nick}</Link></span>
                     <span> {comment.date}</span>
+                    {Cookies.get('role') == 2 || Cookies.get('role') == 3 ? <button id={comment.comment_id} onClick={this.removeComment} className="deleteButton">&times;</button> : ''}
                   </div>
                 </div>
                 <div className="row bg-light">
@@ -178,5 +181,10 @@ export class Article extends React.Component {
         </div>
       </div>
     )
+  }
+  removeComment(e){
+    e.preventDefault();
+    Api.removeComment(e.target.id)
+    this.getComments();
   }
 }

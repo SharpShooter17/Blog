@@ -89,7 +89,7 @@ class UserController extends CI_Controller {
     $result = 0;
     if ($user == -1){
       $result = -1;
-    } else if ( intval($this->user->getUserRole($user) != 3 )){
+    } else if ( intval($this->user->getUserRole($user)) != 3 ){
       $result = 7;
       echo $this->user->getUserRole($user);
     } else {

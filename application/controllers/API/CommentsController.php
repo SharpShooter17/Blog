@@ -5,6 +5,7 @@ class CommentsController extends CI_Controller {
   function __construct(){
     parent::__construct();
     $this->load->model('BlogDB/comments');
+    $this->load->model('BlogDB/user');
     $this->load->model('token');
     $this->load->model('BlogDB/statements');
   }
@@ -31,7 +32,22 @@ class CommentsController extends CI_Controller {
     header('Content-Type: application/json');
     echo json_encode(array('results' => $this->comments->getComments($article) ));
   }
+  public function removeComment($comment_id){
+    $token = $this->input->post('token');
+    $user = intval($this->token->tokenIsValid($token));
+    $userRole = $this->user->getUserRole($user);
 
+    $result = 0;
+    if ($user == -1){
+      $result = -1;
+    } else if ( !($userRole == 3 || $userRole == 2) ){
+      $result = 7;
+    } else {
+      $result = $this->comments->removeComment($comment_id);
+    }
+    header('Content-Type: application/json');
+    echo $this->statements->getJson($result);
+  }
 }
 
 ?>

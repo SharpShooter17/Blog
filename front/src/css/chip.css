@@ -21,3 +21,16 @@
     background-color: #f1f1f1;
     margin: 2px;
 }
+
+.deleteButton{
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  font-weight: bold;
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
+}

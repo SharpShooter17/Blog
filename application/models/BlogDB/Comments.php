@@ -36,6 +36,10 @@ class Comments extends CI_Model
     $this->db->order_by('date', 'DESC');
     return $this->db->get()->result();
   }
+  
+  public function removeComment($id){
+    return $this->db->where('comments.comment_id', $id)->delete('comments') ? 1 : 0;
+  }
 }
 
 ?>

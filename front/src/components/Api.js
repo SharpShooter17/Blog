@@ -195,6 +195,12 @@ const changeUserRole = function(user, role) {
   }))
 }
 
+const removeComment = function(id) {
+  return axios.post(baseURL + '/index.php/API/CommentsController/removeComment/' + id, querystring.stringify({
+    token: Cookies.get('token')
+  }))
+}
+
 export default {getBlogCategories, getUserBlogs, getCategories,
                 addBlog, addCategory, addArticle,
                 getLastestArticles, getUserDetails, getBlogDetails,
@@ -203,4 +209,4 @@ export default {getBlogCategories, getUserBlogs, getCategories,
                 getTags, getArticleTags, searchArticlesByTag,
                 getCountOfArticles, removeArticle, getArticlesByCategoryId,
                 removeCategory, removeBlog, getRoles,
-                changeUserRole}
+                changeUserRole, removeComment}
