@@ -44,7 +44,7 @@ export class Blogs extends React.Component {
               <div className="col-md-4">
                 <select onChange={this.handleOnChange} id="selectCategory" name="selectCategory" className="form-control">
                   <option value="0">Wszystkie kategorie</option>
-                  {this.state.blog_categories.map(category => <option value={category.blog_category_id}>{category.name}</option>)}
+                  {this.state.blog_categories.map(category => <option key={category.blog_category_id.toString()} value={category.blog_category_id}>{category.name}</option>)}
                 </select>
               </div>
               </div>
@@ -67,7 +67,7 @@ export class Blogs extends React.Component {
               </tr>
             </thead>
             <tbody>
-            {this.state.blogs.map( blog => <tr>
+            {this.state.blogs.map( blog => <tr key={blog.blog_id.toString()}>
                 <td><Link to={'/User/'+blog.author + '/' + blog.name}>{blog.name}</Link></td>
                 <td><Link to={'/User/'+blog.author}>{blog.author}</Link></td>
                 <td>{blog.category}</td>

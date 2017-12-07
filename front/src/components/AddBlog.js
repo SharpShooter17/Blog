@@ -47,19 +47,19 @@ export class AddBlog extends React.Component{
         </div>
 
         <div className="form-group">
-        <label class="col-md-4 control-label" htmlFor="categories">Kategoria</label>
-        <div class="col-md-4">
-          <select id="category" name="category" class="form-control">
+        <label className="col-md-4 control-label" htmlFor="categories">Kategoria</label>
+        <div className="col-md-4">
+          <select id="category" name="category" className="form-control">
             <option value="0" selected="" disabled="">Wybierz kategorię</option>
-            {this.state.blog_categories.map(category => <option value={category.blog_category_id}>{category.name}</option>)}
+            {this.state.blog_categories.map(category => <option key={category.blog_category_id.toString()} value={category.blog_category_id}>{category.name}</option>)}
           </select>
         </div>
         </div>
 
-        <div class="form-group">
-        <label class="col-md-4 control-label" htmlFor="submit"></label>
-        <div class="col-md-4">
-          <button onClick={event => {this.onSubmit;}} id="button" name="button" class="btn btn-success">Stwórz blog</button>
+        <div className="form-group">
+        <label className="col-md-4 control-label" htmlFor="submit"></label>
+        <div className="col-md-4">
+          <button onClick={event => {this.onSubmit;}} id="button" name="button" className="btn btn-success">Stwórz blog</button>
         </div>
         </div>
 

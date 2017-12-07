@@ -29,7 +29,7 @@ class Comments extends CI_Model
   }
 
   public function getComments($article){
-    $this->db->select('user.nick, comment, date');
+    $this->db->select('user.nick, comment, date, comments.comment_id');
     $this->db->from('comments');
     $this->db->join('user', 'user.user_id = comments.user_id');
     $this->db->where('article_id', $article);

@@ -42,7 +42,7 @@ export class AddCategory extends React.Component{
           <label className="col-md-4 control-label" htmlFor="blog">Blog</label>
           <div className="col-md-4">
             <select id="blog" name="blog" className="form-control">
-              {this.state.blogs.map(blog => <option value={blog.blog_id}>{blog.name}</option>)}
+              {this.state.blogs.map(blog => <option key={blog.blog_id.toString()} value={blog.blog_id}>{blog.name}</option>)}
             </select>
           </div>
         </div>

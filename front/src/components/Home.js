@@ -54,7 +54,7 @@ export class Home extends Component {
         <h3 className="p-3">Ostatnie artykuły</h3>
         {this.state.articles.map(
           article =>
-          <div className="row m-4">
+          <div key={article.article_id.toString()} className="row m-4">
             <div className="col-12">
               <div className="row">
                 <div className="col-12 bg-dark">
@@ -81,8 +81,8 @@ export class Home extends Component {
         <nav aria-label="...">
           <ul className="pagination pagination-lg justify-content-center">
             {this.state.pages.map(page => (this.props.match.params.page == page) ? (
-              <li className="page-item active"><span className="page-link">{page}</span></li>)
-              : (<li className="page-item"><Link onClick={this.handleOnClick} to={'/Home/' + page} className="page-link">{page}</Link></li>) )}
+              <li key={page.toString()} className="page-item active"><span className="page-link">{page}</span></li>)
+              : (<li key={page.toString()} className="page-item"><Link onClick={this.handleOnClick} to={'/Home/' + page} className="page-link">{page}</Link></li>) )}
           </ul>
         </nav>
       </div>

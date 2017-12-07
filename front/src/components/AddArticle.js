@@ -90,7 +90,7 @@ export default class AddArticle extends React.Component {
             <div className="col-md-4">
               <select onChange={this.updateCategory} id="blog" name="blog" className="form-control" required="">
                 <option value="0" selected="" disabled="">Wybierz blog</option>
-                {this.state.blogs.map(blog => <option value={blog.blog_id}>{blog.name}</option>)}
+                {this.state.blogs.map(blog => <option key={blog.blog_id.toString()} value={blog.blog_id}>{blog.name}</option>)}
               </select>
             </div>
           </div>
@@ -100,7 +100,7 @@ export default class AddArticle extends React.Component {
             <div className="col-md-4">
               <select id="category" name="category" className="form-control" required="">
                 <option value="0" selected="" disabled="">Wybierz kategorię</option>
-                {this.state.categories.map(category => <option value={category.category_id}>{category.name}</option>)}
+                {this.state.categories.map(category => <option key={category.category_id.toString()} value={category.category_id}>{category.name}</option>)}
               </select>
             </div>
           </div>

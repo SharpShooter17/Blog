@@ -40,17 +40,17 @@ export class RemoveBlog extends React.Component {
           <legend>Usuń blog</legend>
 
           <div className="form-group">
-            <label className="col-md-4 control-label" for="blog">Wybierz blog</label>
+            <label className="col-md-4 control-label" htmlFor="blog">Wybierz blog</label>
             <div className="col-md-4">
               <select id="blog" name="blog" className="form-control">
                 <option selected="" value="0">Wybierz blog</option>
-                {this.state.blogs.map(blog => <option value={blog.blog_id}>{blog.name}</option>)}
+                {this.state.blogs.map(blog => <option key={blog.blog_id.toString()} value={blog.blog_id}>{blog.name}</option>)}
               </select>
             </div>
           </div>
 
           <div className="form-group">
-            <label className="col-md-4 control-label" for="submit">Wciśnij aby usunąć blog</label>
+            <label className="col-md-4 control-label" htmlFor="submit">Wciśnij aby usunąć blog</label>
             <div className="col-md-4">
               <button onClick={event => {this.onSubmit;}} id="submit" name="submit" className="btn btn-danger">Usuń blog</button>
             </div>

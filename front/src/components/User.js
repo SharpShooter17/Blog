@@ -57,7 +57,7 @@ export class User extends React.Component {
                 </tr>
               </thead>
               <tbody>
-              {this.state.blogs.map( blog => <tr>
+              {this.state.blogs.map( blog => <tr key={blog.blog_id.toString()}>
                   <td><Link to={'/User/'+this.props.match.params.user+'/'+blog.name}>{blog.name}</Link></td>
                   <td>{blog.creation_date}</td>
                   <td>{blog.category}</td>

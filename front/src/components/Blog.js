@@ -75,7 +75,7 @@ export class Blog extends React.Component {
               <div className="col-md-4">
                 <select onChange={this.handleOnChange} id="category" name="category" className="form-control">
                   <option value="0">Wszystkie kategorie</option>
-                  {this.state.categories.map(category => <option value={category.category_id}>{category.name}</option>) }
+                  {this.state.categories.map(category => <option key={category.category_id.toString()} value={category.category_id}>{category.name}</option>) }
                 </select>
               </div>
               </div>
@@ -96,7 +96,7 @@ export class Blog extends React.Component {
               </thead>
               <tbody>
               {this.state.articles.map( article => ( article.category_id == this.state.actual_category || this.state.actual_category == 0 ) ?
-                                          <tr>
+                                          <tr key={article.article_id.toString()}>
                                             <td><Link to={'/User/'+this.props.match.params.user+'/'+this.props.match.params.blog+'/'+article.article_id}>{article.title}</Link></td>
                                             <td>{article.date}</td>
                                             <td>{article.category}</td>

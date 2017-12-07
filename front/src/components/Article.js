@@ -129,7 +129,7 @@ export class Article extends React.Component {
           <div className="col">
             <h4 className="p-2">Tagi</h4>
             <hr />
-            {this.state.tags.map(t => <div className="chip"><Link to={'/Tag/' + t.tag}>{t.tag}</Link></div> )}
+            {this.state.tags.map(t => <div key={t.tag.toString()} className="chip"><Link to={'/Tag/' + t.tag}>{t.tag}</Link></div> )}
           </div>
         </div>
         <div className="row">
@@ -160,7 +160,7 @@ export class Article extends React.Component {
               <span className="text-danger">{this.state.msg}</span>
             </form>
             : ''}
-            {this.state.comments.map(comment => <div className="m-4">
+            {this.state.comments.map(comment => <div key={comment.comment_id.toString()} className="m-4">
                 <div className="row bg-secondary">
                   <div className="col p-3">
                     <span><Link className="text-warning" to={'/User/' + comment.nick}>{comment.nick}</Link></span>

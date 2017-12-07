@@ -55,36 +55,36 @@ export class RemoveArticle extends React.Component {
           <legend>Usuń artykuł</legend>
 
           <div className="form-group">
-            <label className="col-md-4 control-label" for="blog">Wybierz blog</label>
+            <label className="col-md-4 control-label" htmlFor="blog">Wybierz blog</label>
             <div className="col-md-4">
               <select onChange={this.updateCategory} id="blog" name="blog" className="form-control">
                 <option selected="" disabled="" value="0">Wybierz blog</option>
-                {this.state.blogs.map(blog => <option value={blog.blog_id}>{blog.name}</option>)}
+                {this.state.blogs.map(blog => <option key={blog.blog_id.toString()} value={blog.blog_id}>{blog.name}</option>)}
               </select>
             </div>
           </div>
 
           <div className="form-group">
-            <label className="col-md-4 control-label" for="category">Wybierz kategorię</label>
+            <label className="col-md-4 control-label" htmlFor="category">Wybierz kategorię</label>
             <div className="col-md-4">
               <select onChange={this.updateArticles} id="category" name="category" className="form-control">
                 <option value="0" selected="" disabled="">Wybierz kategorię</option>
-                {this.state.categories.map(category => <option value={category.category_id}>{category.name}</option>)}
+                {this.state.categories.map(category => <option key={category.category_id.toString()} value={category.category_id}>{category.name}</option>)}
               </select>
             </div>
           </div>
           <div className="form-group">
-          <label className="col-md-4 control-label" for="title">Artykuł</label>
+          <label className="col-md-4 control-label" htmlFor="title">Artykuł</label>
           <div className="col-md-4">
             <select id="article" name="article" className="form-control">
               <option value="0">Wybierz artykuł</option>
-              {this.state.articles.map(article => <option value={article.article_id}>{article.title}</option>)}
+              {this.state.articles.map(article => <option key={article.article_id.toString()} value={article.article_id}>{article.title}</option>)}
             </select>
           </div>
           </div>
 
           <div className="form-group">
-          <label className="col-md-4 control-label" for="submit">Wciśnij aby usunąć artykuł</label>
+          <label className="col-md-4 control-label" htmlFor="submit">Wciśnij aby usunąć artykuł</label>
           <div className="col-md-4">
             <button onClick={event => {this.onSubmit;}} id="submit" name="submit" className="btn btn-danger">Usuń artykuł</button>
           </div>

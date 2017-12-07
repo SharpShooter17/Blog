@@ -43,17 +43,17 @@ export class ChangeUserRole extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {this.state.users.map( function(user) { return (<tr>
+              {this.state.users.map( function(user) { return (<tr key={user.user_id.toString()}>
                   <td><span>#</span><span className="userId">{user.user_id}</span></td>
                   <td><Link to={'/User/'+user.nick}>{user.nick}</Link></td>
                   <td>{user.email}</td>
                   <td>
-                  <select onChange={this.handleOnChangeUserRole} name="role" className="form-control" required="">
+                  <select onChange={this.handleOnChangeUserRole} name="role" className="form-control">
                     {this.state.roles.map( function(role) {
                       if (user.role == role.name) {
-                        return (<option selected="" value={role.role_id}>{role.name}</option>)
+                        return (<option key={role.role_id.toString() + user.user_id.toString()} selected="" value={role.role_id}>{role.name}</option>)
                       } else {
-                        return (<option value={role.role_id}>{role.name}</option>)
+                        return (<option key={role.role_id.toString() + user.user_id.toString()} value={role.role_id}>{role.name}</option>)
                     }
                     })}
                   </select>

@@ -32,7 +32,7 @@ export class Users extends React.Component {
             </tr>
           </thead>
           <tbody>
-          {this.state.users.map( user => <tr>
+          {this.state.users.map( user => <tr key={user.user_id.toString()}>
               <td>#{user.user_id}</td>
               <td><Link to={'/User/'+user.nick}>{user.nick}</Link></td>
               <td>{user.email}</td>
